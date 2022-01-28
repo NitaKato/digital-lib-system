@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 
-// load model
 const categoryModel = require('./../models/category');
 const bookModel = require('./../models/book');
 const optionModel = require('./../models/option');
@@ -36,8 +35,6 @@ const addBook = (req, res, next) => {
   } else {
     const image_attr = req.files.cover_image;
 
-    //res.json(image_attr);
-
     const valid_images_extensions = ['image/png', 'image/jpg', 'image/jpeg'];
 
     if (valid_images_extensions.includes(image_attr.mimetype)) {
@@ -56,17 +53,13 @@ const addBook = (req, res, next) => {
         })
         .then((data) => {
           if (data) {
-            // saved
             req.flash('success', 'Book has been created');
           } else {
-            // not saved
             req.flash('error', 'Failed to create book');
           }
 
           res.redirect('/admin/add-book');
         });
-
-      //res.json(image_attr);
     } else {
       req.flash('error', 'Invalid file selected');
       res.redirect('/admin/add-book');
@@ -89,9 +82,6 @@ const allBooks = async (req, res, next) => {
       attributes: ['name'],
     },
   });
-
-  //res.json(books);
-  console.log(books);
   res.render('admin/list-book', {
     books: books,
     currency_data: currency_data,
@@ -131,8 +121,7 @@ const editBook = async (req, res, next) => {
 
 const updateBook = (req, res, next) => {
   if (!req.files) {
-    // not going to update cover image
-
+    // no image update
     bookModel
       .update(
         {
@@ -161,8 +150,7 @@ const updateBook = (req, res, next) => {
         res.redirect('/admin/edit-book/' + req.params.bookId);
       });
   } else {
-    // going to update cover image
-
+    // update image
     const image_attr = req.files.cover_image;
     const valid_images_extensions = ['image/png', 'image/jpg', 'image/jpeg'];
 
@@ -191,17 +179,13 @@ const updateBook = (req, res, next) => {
         )
         .then((data) => {
           if (data) {
-            // saved
             req.flash('success', 'Book has been updated successfully');
           } else {
-            // not saved
             req.flash('error', 'Failed to update book');
           }
 
           res.redirect('/admin/edit-book/' + req.params.bookId);
         });
-
-      //res.json(image_attr);
     } else {
       req.flash('error', 'Invalid file selected');
       res.redirect('/admin/edit-book/' + req.params.bookId);

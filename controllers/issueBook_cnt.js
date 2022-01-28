@@ -115,7 +115,7 @@ const getListIssueBook = async (req, res, next) => {
       },
     },
   });
-  //res.json(issueList);
+
   res.render('admin/issue-history', {
     list: issueList,
   });
