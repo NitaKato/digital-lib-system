@@ -1,9 +1,6 @@
 const express = require('express');
 const Sequelize = require('sequelize');
 
-// var Op = Sequelize.Op;
-
-// load models
 const categoryModel = require('./../models/category');
 const userModel = require('./../models/user');
 const bookModel = require('./../models/book');

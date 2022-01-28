@@ -12,11 +12,9 @@ const addCategory = (req, res) => {
     })
     .then((data) => {
       if (data) {
-        //exists
         req.flash('error', 'Category already exists');
         res.redirect('/admin/add-category');
       } else {
-        // doesn't exists
         categoryModel
           .create({
             name: req.body.name,
@@ -82,7 +80,6 @@ const updateCategory = (req, res, next) => {
     })
     .then((category) => {
       if (category) {
-        // category already exists
         req.flash('error', 'Category already exists!');
         res.redirect('/admin/edit-category/' + req.params.id);
       } else {
@@ -133,7 +130,6 @@ const deleteCategory = (req, res, next) => {
     })
     .then((category) => {
       if (category) {
-        // we have data on the basis of the given id
         categoryModel
           .destroy({
             where: {
@@ -144,10 +140,8 @@ const deleteCategory = (req, res, next) => {
           })
           .then((status) => {
             if (status) {
-              // deleted
               req.flash('success', 'Category has been deleted successfully');
             } else {
-              // not deleted
               req.flash('error', 'Failed to delete category');
             }
 
