@@ -1,0 +1,183 @@
+<%- include('partials/header') %>
+
+<style>
+  #frm-add-book label.error {
+    color: red;
+  }
+  .image-thumbnail {
+    width: 80px;
+    height: 80px;
+  }
+</style>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Edit Book</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Edit Book</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-md-12">
+             <% if(messages.success){ %>
+          <div class="alert alert-success"><%= messages.success %></div>
+          <% } %> <% if(messages.error){ %>
+          <div class="alert alert-danger"><%= messages.error %></div>
+          <% } %>
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Edit Book</h3>
+            </div>
+            <!-- /.card-header -->
+            
+            <div class="card-body">
+              <form
+                method="post"
+                action="/admin/edit-book/<%=book.id%> "
+                id="frm-add-book"
+                enctype="multipart/form-data"
+              >
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input
+                        value="<%=book.name%>"
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter name"
+                        name="name"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Select Category</label>
+                      <select
+                        class="form-control"
+                        required
+                        name="dd_category"
+                        id=""
+                      >
+                        <option value="">Choose category</option>
+                        <% categories.forEach(category => { %>
+                        <option <% if (book.categoryId == category.id) { %> selected <% } %>  value="<%=category.id%>">
+                          <%=category.name%>
+                        </option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Description</label>
+                      <textarea
+                        class="form-control"
+                        name="description"
+                        placeholder="Description"
+                      >
+<%=book.description%></textarea
+                      >
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Amount</label>
+                      <input
+                        value="<%=book.amount%>"
+                        type="number"
+                        class="form-control"
+                        placeholder="Enter amount"
+                        name="amount"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Cover Image</label>
+                      <input
+                        type="file"
+                        name="cover_image"
+                        class="form-control"
+                        
+                      />
+                      <br>
+                      <img class="image-thumbnail" src="<%=book.cover_image%>" alt="">
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Author</label>
+                      <input
+                        value="<%=book.author%>"
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Author Name"
+                        name="author"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Select status</label>
+                      <select class="form-control" name="status" id="">
+                        <option <% if (book.status == '1') { %> selected <% } %>  value="1">Active</option>
+                        <option <% if (book.status == '0') { %> selected <% } %>  value="0">Inactive</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-dark" type="submit">Submit</button>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<%- include('partials/footer') %>

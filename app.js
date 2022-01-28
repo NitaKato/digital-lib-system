@@ -1,0 +1,124 @@
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const sequelize = require('./config/db');
+
+const flash = require('express-flash');
+const session = require('express-session');
+const fileUpload = require('express-fileupload');
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const adminRouter = require('./routes/admin');
+const categoryRouter = require('./routes/category');
+const bookRouter = require('./routes/book');
+const userRouter = require('./routes/user');
+const issueBookRouter = require('./routes/issuebook');
+const returnBookRouter = require('./routes/returnbook');
+
+const app = express();
+
+// import models
+const modAdmin = require('./models/admin');
+const modBook = require('./models/book');
+const modCategory = require('./models/category');
+const modDaySetting = require('./models/daysetting');
+const modIssueBook = require('./models/issuebook');
+const modOption = require('./models/option');
+const modUser = require('./models/user');
+const IssueBook = require('./models/issuebook');
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(
+  session({
+    name: 'my_session',
+    secret: 'my_secret',
+    resave: false,
+  })
+);
+app.use(flash());
+app.use(
+  fileUpload({
+    createParentPath: true,
+  })
+);
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// adding assets for admin routes
+app.use('/admin', express.static(path.join(__dirname, 'public')));
+app.use('/admin/:any', express.static(path.join(__dirname, 'public')));
+
+app.get('/test', (req, res) => {
+  IssueBook.findAll({
+    where: {
+      bookId: 2,
+    },
+    include: [{ model: modUser }, { model: modBook }],
+  })
+    .then((book) => {
+      res.send(book);
+    })
+    .catch((err) => {
+      res.send(err.message);
+    });
+});
+
+app.get('/test1', (req, res) => {
+  modUser
+    .findAll({
+      where: {
+        id: 1,
+      },
+      include: [
+        {
+          model: IssueBook,
+          include: [{ model: modBook, include: [{ model: modCategory }] }],
+        },
+      ],
+    })
+    .then((book) => {
+      res.send(book);
+    })
+    .catch((err) => {
+      res.send(err.message);
+    });
+});
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/', adminRouter);
+app.use('/', categoryRouter);
+app.use('/', bookRouter);
+app.use('/', userRouter);
+app.use('/', issueBookRouter);
+app.use('/', returnBookRouter);
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+sequelize.sync();
+
+module.exports = app;

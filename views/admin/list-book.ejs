@@ -1,0 +1,128 @@
+<%- include('partials/header') %>
+
+<style>
+  .image-thumbnail {
+    width: 80px;
+    height: 80px;
+  }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">List Book</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">List Book</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">List Book</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table
+                id="tbl-list-book"
+                class="table table-bordered table-striped"
+              >
+                <thead>
+                  <tr>
+                    <th>Cover Image</th>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% books.forEach(book => { %>
+                  <tr>
+                    <td>
+                      <img
+                        class="image-thumbnail"
+                        src="<%=book.cover_image%>"
+                        alt=""
+                      />
+                    </td>
+                    <td><%=book.category.name%></td>
+                    <td><%=book.name%></td>
+                    <td><%=book.amount%></td>
+                    <td>
+                      <% if (book.status == '1') { %>
+                      <button class="btn">Active</button>
+                      <% } else { %>
+                      <button class="btn btn-danger">Not Active</button>
+                      <% } %>
+                    </td>
+                    <td>
+                      <a href="/admin/edit-book/<%=book.id%>" class="btn"
+                        ><i class="fa fa-edit"></i
+                      ></a>
+                      <form
+                        method="post"
+                        action="/admin/delete-book/<%=book.id%>"
+                        id="frm-delete-book-<%=book.id%>"
+                      >
+                        <input
+                          type="hidden"
+                          value="<%=book.id%>"
+                          name="book_id"
+                        />
+                      </form>
+
+                      <a
+                        href="javascript:void(0)"
+                        onclick="if(confirm('Are you sure want to delete ? ')){  $('#frm-delete-book-<%=book.id%>').submit()  }"
+                        class="btn btn-danger"
+                        ><i class="fa fa-trash"></i
+                      ></a>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Cover Image</th>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<%- include('partials/footer') %>
