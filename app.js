@@ -17,6 +17,7 @@ const bookRouter = require('./routes/book');
 const userRouter = require('./routes/user');
 const issueBookRouter = require('./routes/issuebook');
 const returnBookRouter = require('./routes/returnbook');
+const loginRouter = require('./routes/login');
 
 const app = express();
 
@@ -58,42 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', express.static(path.join(__dirname, 'public')));
 app.use('/admin/:any', express.static(path.join(__dirname, 'public')));
 
-app.get('/test', (req, res) => {
-  IssueBook.findAll({
-    where: {
-      bookId: 2,
-    },
-    include: [{ model: modUser }, { model: modBook }],
-  })
-    .then((book) => {
-      res.send(book);
-    })
-    .catch((err) => {
-      res.send(err.message);
-    });
-});
-
-app.get('/test1', (req, res) => {
-  modUser
-    .findAll({
-      where: {
-        id: 1,
-      },
-      include: [
-        {
-          model: IssueBook,
-          include: [{ model: modBook, include: [{ model: modCategory }] }],
-        },
-      ],
-    })
-    .then((book) => {
-      res.send(book);
-    })
-    .catch((err) => {
-      res.send(err.message);
-    });
-});
-
+app.use('/', loginRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', adminRouter);
