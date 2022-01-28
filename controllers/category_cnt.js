@@ -31,8 +31,20 @@ const addCategory = (req, res) => {
 
               res.redirect('/admin/add-category');
             }
+          })
+          .catch((err) => {
+            res.status(400).json({
+              status: 0,
+              data: err,
+            });
           });
       }
+    })
+    .catch((err) => {
+      res.status(400).json({
+        status: 0,
+        data: err,
+      });
     });
 };
 
@@ -93,8 +105,20 @@ const updateCategory = (req, res, next) => {
               req.flash('error', 'Failed to update category!');
             }
             res.redirect('/admin/edit-category/' + req.params.id);
+          })
+          .catch((err) => {
+            res.status(400).json({
+              status: 0,
+              data: err,
+            });
           });
       }
+    })
+    .catch((err) => {
+      res.status(400).json({
+        status: 0,
+        data: err,
+      });
     });
 };
 
@@ -128,9 +152,21 @@ const deleteCategory = (req, res, next) => {
             }
 
             res.redirect('/admin/list-category');
+          })
+          .catch((err) => {
+            res.status(400).json({
+              status: 0,
+              data: err,
+            });
           });
       } else {
       }
+    })
+    .catch((err) => {
+      res.status(400).json({
+        status: 0,
+        data: err,
+      });
     });
 };
 
