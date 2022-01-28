@@ -95,7 +95,7 @@
 
     // add ajax requests
 
-    var app_url = 'http://localhost:3000';
+    const app_url = 'http://localhost:3000';
 
     $('#dd_category').on('change', function () {
       var category_id = $(this).val();
@@ -106,7 +106,7 @@
         app_url + '/admin/category-list-book',
         postdata,
         function (response) {
-          var booksHtml = "<option value=''>Choose Book</option>";
+          const booksHtml = "<option value=''>Choose Book</option>";
 
           $.each(response.books, function (index, item) {
             booksHtml +=
