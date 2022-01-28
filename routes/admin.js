@@ -1,7 +1,7 @@
 const express = require('express');
 const Sequelize = require('sequelize');
 
-const Op = Sequelize.Op;
+// var Op = Sequelize.Op;
 
 // load models
 const categoryModel = require('./../models/category');
@@ -12,10 +12,10 @@ const bookModel = require('./../models/book');
 
 const router = express.Router();
 
-router.get('/', async function (req, res, next) {
-  const total_categories = await categoryModel.count();
-  const total_users = await userModel.count();
-  const total_books = await bookModel.count();
+router.get('/admin', async function (req, res, next) {
+  var total_categories = await categoryModel.count();
+  var total_users = await userModel.count();
+  var total_books = await bookModel.count();
 
   res.render('admin/dashboard', {
     users: total_users,
