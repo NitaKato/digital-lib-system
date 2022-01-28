@@ -48,7 +48,7 @@
                         id="dd_category"
                       >
                         <option value="">Choose category</option>
-                        <% categories.forEach(function(category){ %>
+                        <% categories.forEach((category)=>{ %>
                         <option value="<%= category.id %>">
                           <%= category.name %>
                         </option>
@@ -83,7 +83,7 @@
                         id=""
                       >
                         <option value="">Choose User</option>
-                        <% users.forEach(function(user){ %>
+                        <% users.forEach((user)=>{ %>
                         <option value="<%= user.id %>">
                           <%= user.name %> (<%= user.email %>)
                         </option>

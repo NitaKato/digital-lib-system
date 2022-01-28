@@ -97,34 +97,30 @@
 
     const app_url = 'http://localhost:3000';
 
-    $('#dd_category').on('change', function () {
-      var category_id = $(this).val();
+    $('#dd_category').on('change', () => {
+      const category_id = $(this).val();
 
-      var postdata = 'cat_id=' + category_id;
+      const postdata = 'cat_id=' + category_id;
 
-      $.post(
-        app_url + '/admin/category-list-book',
-        postdata,
-        function (response) {
-          const booksHtml = "<option value=''>Choose Book</option>";
+      $.post(app_url + '/admin/category-list-book', postdata, (response) => {
+        const booksHtml = "<option value=''>Choose Book</option>";
 
-          $.each(response.books, function (index, item) {
-            booksHtml +=
-              '<option value="' + item.id + '">' + item.name + '</option>';
-          });
+        $.each(response.books, (index, item) => {
+          booksHtml +=
+            '<option value="' + item.id + '">' + item.name + '</option>';
+        });
 
-          $('#dd_book_list').html(booksHtml);
-        }
-      );
+        $('#dd_book_list').html(booksHtml);
+      });
     });
 
     $('#return-dd-user').on('change', function () {
-      var user_id = $(this).val();
+      const user_id = $(this).val();
 
-      var postdata = 'user_id=' + user_id;
+      const postdata = 'user_id=' + user_id;
 
       $.post(app_url + '/admin/user-list-book', postdata, function (response) {
-        var booksHtml = "<option value=''>Choose Book</option>";
+        const booksHtml = "<option value=''>Choose Book</option>";
 
         $.each(response.books, function (index, item) {
           booksHtml +=
