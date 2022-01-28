@@ -121,14 +121,12 @@ const getListIssueBook = async (req, res, next) => {
   });
 };
 
-const categoryListBook = async function (req, res, next) {
+const categoryListBook = async (req, res, next) => {
   const category_id = req.body.cat_id;
 
   const books = await bookModel.findAll({
     where: {
-      categoryId: {
-        [Op.eq]: category_id,
-      },
+      categoryId: category_id,
     },
   });
 
