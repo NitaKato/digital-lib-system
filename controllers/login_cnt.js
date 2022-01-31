@@ -5,53 +5,13 @@ const adminModel = require('../models/admin');
 
 const Op = Sequelize.Op;
 
-const adminLogin = (req, res, next) => {
-  adminModel
-    .findOne({
-      where: {
-        email: {
-          [Op.eq]: req.body.email,
-        },
-      },
-    })
-    .then((user) => {
-      if (user) {
-        bcrypt.compare(
-          req.body.password,
-          user.password,
-          function (error, result) {
-            if (result) {
-              //user has data
-              req.session.isLoggedIn = true;
-              req.session.userId = user.id;
-              console.log(req.session);
-              res.redirect('/admin');
-            } else {
-              req.flash('error', 'Invalid login details');
-              res.redirect('/admin/login');
-            }
-          }
-        );
-      } else {
-        // we have no data
-        req.flash('error', 'User not found');
-        res.redirect('/admin/login');
-      }
-    })
-    .catch((err) => {
-      res.status(400).json({
-        status: 0,
-        data: err,
-      });
-    });
-};
-
-const adminRegister = (req, res, next) => {
+const superAdminRegister = (req, res, next) => {
   adminModel
     .create({
-      name: 'Online Web Tutor',
-      email: 'admin@gmail.com',
-      password: bcrypt.hashSync('123456', 10),
+      name: 'Super Admin',
+      email: 'superadmin@gmail.com',
+      isSuperAdmin: true,
+      password: bcrypt.hashSync('111222', 10),
     })
     .then((data) => {
       if (data) {
@@ -74,14 +34,50 @@ const adminRegister = (req, res, next) => {
     });
 };
 
-const getAdminLayout = (req, res, next) => {
+const login = (req, res, next) => {
+  adminModel
+    .findOne({
+      where: {
+        email: req.body.email,
+      },
+    })
+    .then((user) => {
+      if (user) {
+        bcrypt.compare(req.body.password, user.password, (error, result) => {
+          if (result) {
+            req.session.isLoggedIn = true;
+            req.session.userId = user.id;
+            req.session.superAdmin = user.isSuperAdmin;
+            if (user.isSuperAdmin) {
+              return res.redirect('/superadmin/homepage');
+            }
+            res.redirect('/admin');
+          } else {
+            req.flash('error', 'Invalid login details');
+            res.redirect('/auth/login');
+          }
+        });
+      } else {
+        req.flash('error', 'User not found');
+        res.redirect('/auth/login');
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({
+        status: 0,
+        data: err,
+      });
+    });
+};
+
+const logout = (req, res, next) => {
   req.session.destroy((error) => {
     if (error) {
       res.redirect('/admin');
     }
     console.log(req.session);
-    res.redirect('/admin/login');
+    res.redirect('/auth/login');
   });
 };
 
-module.exports = { adminLogin, adminRegister, getAdminLayout };
+module.exports = { login, superAdminRegister, logout };

@@ -1,4 +1,3 @@
-
 const Sequelize = require('sequelize');
 
 const userModel = require('./../models/user');
@@ -15,7 +14,7 @@ const addUser = (req, res, next) => {
     .then((user) => {
       if (user) {
         req.flash('error', 'Email address already exists');
-        res.redirect('/admin/add-user');
+        res.redirect('/admin/users/add-user');
       } else {
         userModel
           .create({
@@ -29,18 +28,19 @@ const addUser = (req, res, next) => {
           .then((status) => {
             if (status) {
               req.flash('success', 'User has been created');
-              res.redirect('/admin/add-user');
+              res.redirect('/admin/users/add-user');
             } else {
               req.flash('error', 'Failed to save users');
-              res.redirect('/admin/add-user');
+              res.redirect('/admin/users/add-user');
             }
           });
       }
-    }).catch(err => {
-      res.status(400).json({
-        data: err
-      })
     })
+    .catch((err) => {
+      res.status(400).json({
+        data: err,
+      });
+    });
 };
 
 const allUsers = async (req, res) => {
@@ -87,7 +87,7 @@ const updateUser = (req, res, next) => {
         req.flash('error', 'Failed to update user');
       }
 
-      res.redirect('/admin/edit-user/' + req.params.id);
+      res.redirect('/admin/users/edit-user/' + req.params.id);
     });
 };
 
@@ -107,7 +107,7 @@ const deleteUser = (req, res, next) => {
         req.flash('error', 'Failed to delete user');
       }
 
-      res.redirect('/admin/list-user');
+      res.redirect('/admin/users/list-user');
     });
 };
 

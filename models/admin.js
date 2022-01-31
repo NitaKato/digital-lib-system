@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../config/db');
+const School = require('./school');
 
 const Admin = sequelize.define(
   'admin',
@@ -16,10 +17,18 @@ const Admin = sequelize.define(
       type: Sequelize.STRING(150),
       allowNull: false,
     },
+    isSuperAdmin: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     timestamps: false,
   }
 );
+
+School.hasMany(Admin);
+
+Admin.belongsTo(School);
 
 module.exports = Admin;

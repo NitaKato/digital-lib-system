@@ -63,12 +63,12 @@
                       <% } %>
                     </td>
                     <td>
-                      <a href="/admin/edit-user/<%=user.id%>" class="btn"
+                      <a href="/admin/users/edit-user/<%=user.id%>" class="btn"
                         ><i class="fa fa-edit"></i
                       ></a>
                       <form
                         method="post"
-                        action="/admin/delete-user"
+                        action="/admin/users/delete-user"
                         id="frm-delete-user-<%= user.id %>"
                       >
                         <input

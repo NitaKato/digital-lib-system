@@ -9,7 +9,9 @@ const flash = require('express-flash');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
 
+const superAdminRouter = require('./routes/superAdmin');
 const indexRouter = require('./routes/index');
+const schoolRouter = require('./routes/school');
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin');
 const categoryRouter = require('./routes/category');
@@ -22,6 +24,7 @@ const loginRouter = require('./routes/login');
 const app = express();
 
 // import models
+const modSchool = require('./models/school');
 const modAdmin = require('./models/admin');
 const modBook = require('./models/book');
 const modCategory = require('./models/category');
@@ -30,6 +33,8 @@ const modIssueBook = require('./models/issuebook');
 const modOption = require('./models/option');
 const modUser = require('./models/user');
 const IssueBook = require('./models/issuebook');
+
+const { isLoggedIn, isSuperAdmin, isAdmin } = require('./middleware/auth');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,19 +61,31 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // adding assets for admin routes
+app.use('/:any', express.static(path.join(__dirname, 'public')));
 app.use('/admin', express.static(path.join(__dirname, 'public')));
 app.use('/admin/:any', express.static(path.join(__dirname, 'public')));
+app.use('/admin/books/:any', express.static(path.join(__dirname, 'public')));
+app.use(
+  '/admin/categories/:any',
+  express.static(path.join(__dirname, 'public'))
+);
+app.use('/admin/users/:any', express.static(path.join(__dirname, 'public')));
 
-app.use('/', loginRouter);
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/', adminRouter);
-app.use('/', categoryRouter);
-app.use('/', bookRouter);
-app.use('/', userRouter);
-app.use('/', issueBookRouter);
-app.use('/', returnBookRouter);
+// auth
+app.use('/auth', loginRouter);
+// superadmini
+app.use('/superadmin/schools', isLoggedIn, isSuperAdmin, schoolRouter);
+app.use('/superadmin', isLoggedIn, isSuperAdmin, superAdminRouter);
 
+//admini
+// app.use('/', indexRouter);
+
+app.use('/admin/categories', isLoggedIn, isAdmin, categoryRouter);
+app.use('/admin/books', isLoggedIn, isAdmin, bookRouter);
+app.use('/admin/users', isLoggedIn, isAdmin, userRouter);
+app.use('/admin/issues', isLoggedIn, isAdmin, issueBookRouter);
+app.use('/admin/returns', isLoggedIn, isAdmin, returnBookRouter);
+app.use('/admin', isLoggedIn, isAdmin, adminRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

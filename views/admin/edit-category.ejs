@@ -50,7 +50,7 @@
                 id="frm-add-category"
                 name="frm-add-category"
                 method="POST"
-                action="/admin/edit-category/<%=category.id%>"
+                action="/admin/categories/edit-category/<%=category.id%>"
               >
                 <div class="row">
                   <div class="col-sm-6">
@@ -62,7 +62,7 @@
                         class="form-control"
                         placeholder="Enter name"
                         name="name"
-                        value="<%= category.name  %> "
+                        value="<%= category.name  %>"
                         required
                       />
                     </div>
