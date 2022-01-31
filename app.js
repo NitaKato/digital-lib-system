@@ -20,6 +20,7 @@ const userRouter = require('./routes/user');
 const issueBookRouter = require('./routes/issuebook');
 const returnBookRouter = require('./routes/returnbook');
 const loginRouter = require('./routes/login');
+const errorRouter = require('./routes/error');
 
 const app = express();
 
@@ -80,6 +81,7 @@ app.use('/superadmin', isLoggedIn, isSuperAdmin, superAdminRouter);
 //admini
 // app.use('/', indexRouter);
 
+app.get('/error', errorRouter);
 app.use('/admin/categories', isLoggedIn, isAdmin, categoryRouter);
 app.use('/admin/books', isLoggedIn, isAdmin, bookRouter);
 app.use('/admin/users', isLoggedIn, isAdmin, userRouter);

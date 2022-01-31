@@ -6,11 +6,11 @@ const isLoggedIn = (req, res, next) => {
 
 const isSuperAdmin = (req, res, next) => {
   console.log('^^^^^^^^^^^^^^^^^^^^^^^^^@@@@@', req.ression);
-  req.session.isSuperAdmin ? next() : res.redirect('/admin/');
+  req.session.isSuperAdmin ? next() : res.redirect('/error');
 };
 
 const isAdmin = (req, res, next) => {
-  req.session.isSuperAdmin ? res.redirect('/superadmin/homepage') : next();
+  req.session.isSuperAdmin ? res.redirect('/error') : next();
 };
 
 module.exports = { isLoggedIn, isSuperAdmin, isAdmin };
