@@ -10,16 +10,16 @@ const {
 const router = express.Router();
 
 router
-  .route('/admin/add-user')
+  .route('/add-user')
   .get(function (req, res, next) {
     res.render('admin/add-user');
   })
   .post(addUser);
 
-router.get('/admin/list-user', allUsers);
+router.get('/list-user', allUsers);
 
-router.route('/admin/edit-user/:id').get(editUser).post(updateUser);
+router.route('/edit-user/:id').get(editUser).post(updateUser);
 
-router.post('/admin/delete-user', deleteUser);
+router.post('/delete-user', deleteUser);
 
 module.exports = router;

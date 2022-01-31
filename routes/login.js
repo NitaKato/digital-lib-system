@@ -1,21 +1,20 @@
 const express = require('express');
 const { redirectHome, redirectLogin } = require('../middleware/redirect');
 const {
-  adminLogin,
-  adminRegister,
-  getAdminLayout,
+  login,
+  superAdminRegister,
+  logout,
 } = require('../controllers/login_cnt');
 const router = express.Router();
 
 router
-  .route('/admin/login')
+  .route('/login')
   .get(redirectHome, (req, res, next) => {
     res.render('login');
   })
-  .post(adminLogin);
+  .post(login);
 
-router.get('/admin/register', adminRegister);
-
-router.get('/admin/logout', redirectLogin, getAdminLayout);
+router.get('/logout', redirectLogin, logout);
+router.get('/superadmin/register', superAdminRegister); //only ONCE
 
 module.exports = router;

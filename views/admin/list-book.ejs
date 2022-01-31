@@ -77,12 +77,12 @@
                       <% } %>
                     </td>
                     <td>
-                      <a href="/admin/edit-book/<%=book.id%>" class="btn"
+                      <a href="/admin/books/edit-book/<%=book.id%>" class="btn"
                         ><i class="fa fa-edit"></i
                       ></a>
                       <form
                         method="post"
-                        action="/admin/delete-book/<%=book.id%>"
+                        action="/admin/books/delete-book/<%=book.id%>"
                         id="frm-delete-book-<%=book.id%>"
                       >
                         <input

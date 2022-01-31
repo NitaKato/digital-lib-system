@@ -1,5 +1,6 @@
 <%- include('partials/header') %>
 
+
 <style>
   #frm-add-book label.error {
     color: red;
@@ -54,7 +55,7 @@
             <div class="card-body">
               <form
                 method="post"
-                action="/admin/edit-book/<%=book.id%> "
+                action="/admin/books/edit-book/<%=book.id%>"
                 id="frm-add-book"
                 enctype="multipart/form-data"
               >

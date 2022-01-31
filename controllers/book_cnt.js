@@ -3,6 +3,8 @@ const Sequelize = require('sequelize');
 const categoryModel = require('./../models/category');
 const bookModel = require('./../models/book');
 const optionModel = require('./../models/option');
+const schoolModel = require('./../models/school');
+const adminModel = require('./../models/admin');
 
 const Op = Sequelize.Op;
 
@@ -29,7 +31,15 @@ const addBookView = async (req, res, next) => {
   });
 };
 
-const addBook = (req, res, next) => {
+const addBook = async (req, res, next) => {
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
+
   if (!req.files) {
     req.flash('error', 'Please upload some file');
   } else {
@@ -44,12 +54,15 @@ const addBook = (req, res, next) => {
       bookModel
         .create({
           name: req.body.name,
+          // change dd_category to categoryId
+          // Change categoryId to dd_category ...
           categoryId: req.body.dd_category,
           description: req.body.description,
           amount: req.body.amount,
           cover_image: '/images/books/' + filename,
           author: req.body.author,
           status: req.body.status,
+          schoolId: admin.schoolId,
         })
         .then((data) => {
           if (data) {
@@ -58,11 +71,17 @@ const addBook = (req, res, next) => {
             req.flash('error', 'Failed to create book');
           }
 
-          res.redirect('/admin/add-book');
+          res.redirect('/admin/books/add-book');
+        })
+        .catch((err) => {
+          res.status(400).json({
+            status: 0,
+            data: err,
+          });
         });
     } else {
       req.flash('error', 'Invalid file selected');
-      res.redirect('/admin/add-book');
+      res.redirect('/admin/books/add-book');
     }
   }
 };
@@ -147,7 +166,7 @@ const updateBook = (req, res, next) => {
           req.flash('error', 'Failed to update book');
         }
 
-        res.redirect('/admin/edit-book/' + req.params.bookId);
+        res.redirect('/admin/books/edit-book/' + req.params.bookId);
       });
   } else {
     // update image
@@ -184,11 +203,11 @@ const updateBook = (req, res, next) => {
             req.flash('error', 'Failed to update book');
           }
 
-          res.redirect('/admin/edit-book/' + req.params.bookId);
+          res.redirect('/admin/books/edit-book/' + req.params.bookId);
         });
     } else {
       req.flash('error', 'Invalid file selected');
-      res.redirect('/admin/edit-book/' + req.params.bookId);
+      res.redirect('/admin/books/edit-book/' + req.params.bookId);
     }
   }
 };
@@ -215,15 +234,15 @@ const deleteBook = (req, res, next) => {
           .then((status) => {
             if (status) {
               req.flash('success', 'Book has been deleted');
-              res.redirect('/admin/list-book');
+              res.redirect('/admin/books/list-book');
             } else {
               req.flash('error', 'Failed to delete Book');
-              res.redirect('/admin/list-book');
+              res.redirect('/admin/books/list-book');
             }
           });
       } else {
         req.flash('error', 'Invalid Book Id');
-        res.redirect('/admin/list-book');
+        res.redirect('/admin/books/list-book');
       }
     });
 };

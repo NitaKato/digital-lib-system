@@ -55,7 +55,7 @@ const issueBook = async (req, res, next) => {
 
   if (is_book_issued > 0) {
     req.flash('error', 'Book has been already issued to this user');
-    res.redirect('/admin/issue-book');
+    res.redirect('/admin/issues/issue-book');
   } else {
     const count_books = await issueBookModel.count({
       where: {
@@ -70,7 +70,7 @@ const issueBook = async (req, res, next) => {
 
     if (count_books >= 2) {
       req.flash('error', 'Maximum books allowed for each user equals to 2');
-      res.redirect('/admin/issue-book');
+      res.redirect('/admin/issues/issue-book');
     } else {
       issueBookModel
         .create({
@@ -86,7 +86,7 @@ const issueBook = async (req, res, next) => {
             req.flash('error', 'Failed to issue Book');
           }
 
-          res.redirect('/admin/list-issue-book');
+          res.redirect('/admin/issues/list-issue-book');
         });
     }
   }

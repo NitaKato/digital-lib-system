@@ -13,7 +13,7 @@ const addCategory = (req, res) => {
     .then((data) => {
       if (data) {
         req.flash('error', 'Category already exists');
-        res.redirect('/admin/add-category');
+        res.redirect('/admin/categories/add-category');
       } else {
         categoryModel
           .create({
@@ -23,11 +23,11 @@ const addCategory = (req, res) => {
           .then((category) => {
             if (category) {
               req.flash('success', 'Category created successfully');
-              res.redirect('/admin/add-category');
+              res.redirect('/admin/categories/add-category');
             } else {
               req.flash('error', 'Failed to create category');
 
-              res.redirect('/admin/add-category');
+              res.redirect('/admin/categories/add-category');
             }
           })
           .catch((err) => {
@@ -81,7 +81,7 @@ const updateCategory = (req, res, next) => {
     .then((category) => {
       if (category) {
         req.flash('error', 'Category already exists!');
-        res.redirect('/admin/edit-category/' + req.params.id);
+        res.redirect('/admin/categories/edit-category/' + req.params.id);
       } else {
         categoryModel
           .update(
@@ -101,7 +101,7 @@ const updateCategory = (req, res, next) => {
             } else {
               req.flash('error', 'Failed to update category!');
             }
-            res.redirect('/admin/edit-category/' + req.params.id);
+            res.redirect('/admin/categories/edit-category/' + req.params.id);
           })
           .catch((err) => {
             res.status(400).json({
@@ -145,7 +145,7 @@ const deleteCategory = (req, res, next) => {
               req.flash('error', 'Failed to delete category');
             }
 
-            res.redirect('/admin/list-category');
+            res.redirect('/admin/categories/list-category');
           })
           .catch((err) => {
             res.status(400).json({

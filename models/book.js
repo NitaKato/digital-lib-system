@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../config/db');
 const Category = require('./../models/category');
+const School = require('./school');
 
 const Book = sequelize.define('book', {
   name: {
@@ -52,6 +53,18 @@ Category.hasMany(Book, {
 Book.belongsTo(Category, {
   foreignKey: {
     name: 'categoryId',
+  },
+});
+
+School.hasMany(Book, {
+  foreignKey: {
+    allowNull: false,
+  },
+});
+
+Book.belongsTo(School, {
+  foreignKey: {
+    allowNull: false,
   },
 });
 
