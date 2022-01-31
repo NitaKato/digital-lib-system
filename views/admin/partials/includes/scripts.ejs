@@ -98,16 +98,20 @@
     $('#dd_category').on('change', (e) => {
       const postdata = 'cat_id=' + e.target.value;
 
-      $.post(app_url + '/admin/category-list-book', postdata, (response) => {
-        let booksHtml = "<option value=''>Choose Book</option>";
+      $.post(
+        app_url + '/admin/issues/category-list-book',
+        postdata,
+        (response) => {
+          let booksHtml = "<option value=''>Choose Book</option>";
 
-        $.each(response.books, (index, item) => {
-          booksHtml +=
-            '<option value="' + item.id + '">' + item.name + '</option>';
-        });
+          $.each(response.books, (index, item) => {
+            booksHtml +=
+              '<option value="' + item.id + '">' + item.name + '</option>';
+          });
 
-        $('#dd_book_list').html(booksHtml);
-      });
+          $('#dd_book_list').html(booksHtml);
+        }
+      );
     });
 
     $('#return-dd-user').on('change', function () {
