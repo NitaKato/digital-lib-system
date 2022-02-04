@@ -31,8 +31,7 @@ const addSchool = (req, res, next) => {
 
 const allSchools = async (req, res) => {
   const allSchools = await schoolModel.findAll();
-  //   res.render('admin/list-school', { school: allSchools });
-  res.send(allSchools);
+  res.render('superadmin/list-school', { school: allSchools });
 };
 
 const getUpdateSchool = async (req, res, next) => {

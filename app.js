@@ -80,7 +80,6 @@ app.use('/superadmin', isLoggedIn, isSuperAdmin, superAdminRouter);
 
 //admini
 // app.use('/', indexRouter);
-
 app.get('/error', errorRouter);
 app.use('/admin/categories', isLoggedIn, isAdmin, categoryRouter);
 app.use('/admin/books', isLoggedIn, isAdmin, bookRouter);
@@ -88,6 +87,7 @@ app.use('/admin/users', isLoggedIn, isAdmin, userRouter);
 app.use('/admin/issues', isLoggedIn, isAdmin, issueBookRouter);
 app.use('/admin/returns', isLoggedIn, isAdmin, returnBookRouter);
 app.use('/admin', isLoggedIn, isAdmin, adminRouter);
+app.get('/', usersRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

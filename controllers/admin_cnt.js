@@ -29,9 +29,9 @@ const addAdmin = (req, res, next) => {
     })
     .then((user) => {
       if (user) {
-        // req.flash('error', 'Email address already exists');
-        res.send('NO');
-        // res.redirect('/sa/add-admin');
+        req.flash('error', 'Email address already exists');
+        // res.send('NO');
+        res.redirect('/superadmin/add-admin');
       } else {
         let password = req.body.personal_number;
         adminModel
@@ -44,10 +44,10 @@ const addAdmin = (req, res, next) => {
           .then((status) => {
             if (status) {
               req.flash('success', 'User has been registered');
-              res.redirect('/sa/add-admin');
+              res.redirect('/superadmin/add-admin');
             } else {
               req.flash('error', 'Failed to register user');
-              res.redirect('/sa/add-admin');
+              res.redirect('/superadmin/add-admin');
             }
           })
           .catch((err) => {
@@ -66,8 +66,7 @@ const addAdmin = (req, res, next) => {
 
 const allAdmins = async (req, res) => {
   const allAdmins = await adminModel.findAll();
-  //   res.render('admin/sa/list-admins', { admins: allAdmins });
-  res.send('OK');
+  res.render('superadmin/list-admin', { admins: allAdmins });
 };
 
 const editAdmin = async (req, res, next) => {
@@ -78,10 +77,10 @@ const editAdmin = async (req, res, next) => {
       },
     },
   });
-  res.send('ok');
-  //   res.render('admin//sa/edit-admin', {
-  //     user: user_data,
-  //   });
+
+  res.render('superadmin/edit-admin', {
+    admin: admin_data,
+  });
 };
 
 const updateAdmin = (req, res, next) => {
