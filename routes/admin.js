@@ -22,9 +22,9 @@ const { adminRegister } = require('../controllers/login_cnt');
 const router = express.Router();
 
 router.get('/', redirectLogin, async (req, res, next) => {
-  var total_categories = await categoryModel.count();
-  var total_users = await userModel.count();
-  var total_books = await bookModel.count();
+  const total_categories = await categoryModel.count();
+  const total_users = await userModel.count();
+  const total_books = await bookModel.count();
 
   res.render('admin/dashboard', {
     users: total_users,
