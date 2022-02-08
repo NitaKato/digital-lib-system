@@ -91,6 +91,14 @@
       $('#frm-add-days-settings').validate();
     }
 
+    if ($('#tbl-list-school').length > 0) {
+      $('#tbl-list-school').DataTable();
+    }
+
+    if ($('#tbl-list-admin').length > 0) {
+      $('#tbl-list-admin').DataTable();
+    }
+
     // add ajax requests
 
     const app_url = 'http://localhost:3000';

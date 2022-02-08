@@ -101,6 +101,7 @@ const allBooks = async (req, res, next) => {
       attributes: ['name'],
     },
   });
+  console.log(books);
   res.render('admin/list-book', {
     books: books,
     currency_data: currency_data,

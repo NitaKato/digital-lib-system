@@ -65,16 +65,23 @@ const addAdmin = (req, res, next) => {
 };
 
 const allAdmins = async (req, res) => {
-  const allAdmins = await adminModel.findAll();
+  const allAdmins = await adminModel.findAll({
+    include: {
+      model: schoolModel,
+      attributes: ['name'],
+    },
+    where: {
+      isSuperAdmin: false,
+    },
+  });
+
   res.render('superadmin/list-admin', { admins: allAdmins });
 };
 
 const editAdmin = async (req, res, next) => {
   const admin_data = await adminModel.findOne({
     where: {
-      id: {
-        [Op.eq]: req.params.id,
-      },
+      id: req.params.id,
     },
   });
 
@@ -88,10 +95,9 @@ const updateAdmin = (req, res, next) => {
     .update(
       {
         name: req.body.name,
-        mobile: req.body.mobile,
+        email: req.body.email,
         gender: req.body.dd_gender,
-        address: req.body.address,
-        status: req.body.status,
+        schoolId: req.body.schoolId,
       },
       {
         where: {
@@ -107,8 +113,8 @@ const updateAdmin = (req, res, next) => {
       } else {
         req.flash('error', 'Failed to update user');
       }
-      res.send('ok');
-      //   res.redirect('/admin/sa/edit-admin/' + req.params.id);
+      // res.send('ok');
+      res.redirect('/superadmin/edit-admin/' + req.params.id);
     });
 };
 
@@ -117,7 +123,7 @@ const deleteAdmin = (req, res, next) => {
     .destroy({
       where: {
         id: {
-          [Op.eq]: req.body.user_id,
+          [Op.eq]: req.body.admin_id,
         },
       },
     })
@@ -128,8 +134,14 @@ const deleteAdmin = (req, res, next) => {
         req.flash('error', 'Failed to delete user');
       }
 
-      //   res.redirect('/admin/sa/list-admin');
-      res.send('ok');
+      res.redirect('/superadmin/list-admin');
+      // res.send('ok');
+    })
+    .catch((err) => {
+      res.status(400).json({
+        status: 0,
+        data: err,
+      });
     });
 };
 
