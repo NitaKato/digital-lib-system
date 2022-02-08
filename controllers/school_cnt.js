@@ -15,10 +15,10 @@ const addSchool = (req, res, next) => {
     .then((status) => {
       if (status) {
         req.flash('success', 'School has been created');
-        res.redirect('/sa/add-school');
+        res.redirect('/superadmin/schools/add-school');
       } else {
         req.flash('error', 'Failed to save school');
-        res.redirect('/sa/add-school');
+        res.redirect('/superadmin/schools/add-school');
       }
     })
     .catch((err) => {
@@ -31,7 +31,7 @@ const addSchool = (req, res, next) => {
 
 const allSchools = async (req, res) => {
   const allSchools = await schoolModel.findAll();
-  res.render('superadmin/list-school', { school: allSchools });
+  res.render('superadmin/list-school', { schools: allSchools });
 };
 
 const getUpdateSchool = async (req, res, next) => {
@@ -43,7 +43,7 @@ const getUpdateSchool = async (req, res, next) => {
     },
   });
 
-  res.render('admin/edit-school', {
+  res.render('superadmin/edit-school', {
     school: school_data,
   });
 };
@@ -72,7 +72,7 @@ const updateSchool = (req, res, next) => {
         req.flash('error', 'Failed to update school');
       }
 
-      res.redirect('/admin/edit-school/' + req.params.id);
+      res.redirect('/superadmin/schools/edit-school/' + req.params.id);
     })
     .catch((err) => {
       res.status(400).json({
@@ -98,7 +98,7 @@ const deleteSchool = (req, res, next) => {
         req.flash('error', 'Failed to delete school');
       }
 
-      res.redirect('/admin/list-school');
+      res.redirect('/superadmin/schools/list-school');
     })
     .catch((err) => {
       res.status(400).json({

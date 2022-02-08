@@ -1,111 +1,133 @@
-<%- include('./../admin/partials/header') %>
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0">List Admin</h1>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">List Admin</li>
-          </ol>
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>LMS | Superadmin</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Font Awesome -->
+    <%- include("./../admin/partials/includes/styles") %>
+  </head>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <%- include("./../admin/partials/includes/top-nav") %> <%-
+      include("./../admin/partials/includes/sa_sidebar") %>
     </div>
-    <!-- /.container-fluid -->
-  </div>
-  <!-- /.content-header -->
+  </body>
 
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card card-dark">
-            <div class="card-header">
-              <h3 class="card-title">List Admin</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table
-                id="tbl-list-user"
-                class="table table-bordered table-striped"
-              >
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email Address</th>
-                    <th>School</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% admins.forEach(admin => { %>
-                  <tr>
-                    <td><%=admin.name%></td>
-                    <td><%=admin.email%></td>
-                    <td><%=admin.mobile%></td>
-                    <td>
-                      <% if (admin.status == '1') { %>
-                      <button class="btn">Active</button>
-                      <% } else { %>
-                      <button class="btn btn-danger">Not Active</button>
-                      <% } %>
-                    </td>
-                    <td>
-                      <a href="/superadmin/edit-admin/<%=admin.id%>" class="btn"
-                        ><i class="fa fa-edit"></i
-                      ></a>
-                      <form
-                        method="post"
-                        action="/superadmin/delete-admin"
-                        id="frm-delete-user-<%= admin.id %>"
-                      >
-                        <input
-                          type="hidden"
-                          value="<%= admin.id %>"
-                          name="user_id"
-                        />
-                      </form>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">List School</h1>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">List School</li>
+            </ol>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
 
-                      <a
-                        href="javascript:void(0)"
-                        onclick="if(confirm('Are you sure want to delete ? ')){  $('#frm-delete-admin-<%= admin.id %>').submit()  }"
-                        class="btn btn-danger"
-                        ><i class="fa fa-trash"></i
-                      ></a>
-                    </td>
-                  </tr>
-                  <% }) %>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email Address</th>
-                    <th>School</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </tfoot>
-              </table>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">List School</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table
+                  id="tbl-list-school"
+                  class="table table-bordered table-striped"
+                >
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Address</th>
+                      <th>City</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% schools.forEach(school => { %>
+                    <tr>
+                      <td><%=school.name%></td>
+                      <td><%=school.address%></td>
+                      <td><%=school.city%></td>
+                      <td>
+                        <% if (school.status == '1') { %>
+                        <button class="btn">Active</button>
+                        <% } else { %>
+                        <button class="btn btn-danger">Not Active</button>
+                        <% } %>
+                      </td>
+                      <td>
+                        <a
+                          href="/superadmin/schools/edit-school/<%=school.id%>"
+                          class="btn"
+                          ><i class="fa fa-edit"></i
+                        ></a>
+                        <form
+                          method="post"
+                          action="/superadmin/schools/delete-school/<%=school.id%> "
+                          id="frm-delete-school-<%= school.id %>"
+                        >
+                          <input
+                            type="hidden"
+                            value="<%= school.id %>"
+                            name="school_id"
+                          />
+                        </form>
+
+                        <a
+                          href="javascript:void(0)"
+                          onclick="if(confirm('Are you sure want to delete ? ')){  $('#frm-delete-school-<%= school.id %>').submit()  }"
+                          class="btn btn-danger"
+                          ><i class="fa fa-trash"></i
+                        ></a>
+                      </td>
+                    </tr>
+                    <% }) %>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email Address</th>
+                      <th>School</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
             </div>
-            <!-- /.card-body -->
           </div>
         </div>
+        <!-- /.row -->
       </div>
-      <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-  </section>
-  <!-- /.content -->
-</div>
-<%- include('./../admin/partials/footer') %>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+  <%- include('./../admin/partials/footer') %>
+</html>

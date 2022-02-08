@@ -18,8 +18,8 @@ router
 
 router.get('/list-school', allSchools);
 
-router.route('/edit-school/:id').get(getUpdateSchool).post(updateSchool);
+router.route('/edit-school/:schoolId').get(getUpdateSchool).post(updateSchool);
 
-router.post('/delete-school', deleteSchool);
+router.post('/delete-school/:schoolId', deleteSchool);
 
 module.exports = router;
