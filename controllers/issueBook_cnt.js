@@ -132,11 +132,19 @@ const getListIssueBook = async (req, res, next) => {
 };
 
 const categoryListBook = async (req, res, next) => {
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
   const category_id = req.body.cat_id;
 
   const books = await bookModel.findAll({
     where: {
       categoryId: category_id,
+      schoolId: admin.schoolId,
     },
   });
 

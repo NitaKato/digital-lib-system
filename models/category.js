@@ -7,7 +7,6 @@ const Category = sequelize.define('category', {
   name: {
     type: Sequelize.STRING(50),
     allowNull: false,
-    unique: true,
   },
   status: {
     type: Sequelize.ENUM('1', '0'),
