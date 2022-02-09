@@ -13,6 +13,6 @@ router.get('/list-issue-book', (req, res) => {
   res.render('/issue-history', getListIssueBook);
 });
 
-router.post('/issues/category-list-book', categoryListBook);
+router.post('/category-list-book', categoryListBook);
 
 module.exports = router;
