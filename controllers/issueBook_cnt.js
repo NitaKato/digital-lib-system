@@ -97,25 +97,48 @@ const issueBook = async (req, res, next) => {
           }
 
           res.redirect('/admin/issues/list-issue-book');
+        })
+        .catch((err) => {
+          res.status(400).json({
+            status: 0,
+            data: err,
+          });
         });
     }
   }
 };
 
-const getListIssueBook = async (req, res, next) => {
+const getListIssueBook = async (req, res) => {
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
+
   const issueList = await issueBookModel.findAll({
     include: [
       {
         model: categoryModel,
         attributes: ['name'],
+        where: {
+          schoolId: admin.schoolId,
+        },
       },
       {
         model: bookModel,
         attributes: ['name'],
+        where: {
+          schoolId: admin.schoolId,
+        },
       },
       {
         model: userModel,
         attributes: ['name', 'email'],
+        where: {
+          schoolId: admin.schoolId,
+        },
       },
     ],
     attributes: ['days_issued', 'issued_date'],
@@ -125,7 +148,8 @@ const getListIssueBook = async (req, res, next) => {
       },
     },
   });
-
+  console.log(issueList);
+  // res.json(issueList);
   res.render('admin/issue-history', {
     list: issueList,
   });

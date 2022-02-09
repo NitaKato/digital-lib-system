@@ -9,9 +9,7 @@ const router = express.Router();
 
 router.route('/issue-book').get(getIssueBook).post(issueBook);
 
-router.get('/list-issue-book', (req, res) => {
-  res.render('/issue-history', getListIssueBook);
-});
+router.get('/list-issue-book', getListIssueBook);
 
 router.post('/category-list-book', categoryListBook);
 
