@@ -17,6 +17,7 @@ const addCategory = async (req, res) => {
     .findOne({
       where: {
         name: req.body.name,
+        schoolId: admin.schoolId,
       },
     })
 
