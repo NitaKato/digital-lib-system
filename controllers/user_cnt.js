@@ -108,6 +108,12 @@ const deleteUser = (req, res, next) => {
       }
 
       res.redirect('/admin/users/list-user');
+    })
+    .catch((err) => {
+      res.status(400).json({
+        status: 0,
+        data: err,
+      });
     });
 };
 
