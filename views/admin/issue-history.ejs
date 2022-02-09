@@ -46,17 +46,30 @@
                     <th>Book</th>
                     <th>User Info</th>
                     <th>Total Days</th>
-                    <th>Status</th>
+                    <th>Issue Date</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <% list.forEach(item => { %>
+                  <tr>
+                    <td><%=item.category.name%></td>
+                    <td><%=item.book.name%></td>
+                    <td>
+                      <%=item.user.name%> <br />
+                      <%=item.user.email%>
+                    </td>
+                    <td><%=item.days_issued%></td>
+                    <td><%=item.issued_date%></td>
+                  </tr>
+                  <% }) %>
+                </tbody>
                 <tfoot>
                   <tr>
                     <th>Category Name</th>
                     <th>Book</th>
                     <th>User Info</th>
                     <th>Total Days</th>
-                    <th>Status</th>
+                    <th>Issue Date</th>
                   </tr>
                 </tfoot>
               </table>
