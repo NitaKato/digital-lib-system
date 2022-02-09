@@ -7,23 +7,35 @@ const Op = Sequelize.Op;
 
 const superAdminRegister = (req, res, next) => {
   adminModel
-    .create({
-      name: 'Super Admin',
-      email: 'superadmin@gmail.com',
-      isSuperAdmin: true,
-      password: bcrypt.hashSync('111222', 10),
+    .findOne({
+      where: {
+        isSuperAdmin: true,
+      },
     })
     .then((data) => {
       if (data) {
-        res.json({
-          status: 1,
-          message: 'Admin created successfully',
-        });
+        res.redirect('/auth/login');
       } else {
-        res.json({
-          status: 0,
-          message: 'Failed to create admin',
-        });
+        adminModel
+          .create({
+            name: 'Super Admin',
+            email: 'superadmin@gmail.com',
+            isSuperAdmin: true,
+            password: bcrypt.hashSync('111222', 10),
+          })
+          .then((data) => {
+            if (data) {
+              res.json({
+                status: 1,
+                message: 'Admin created successfully',
+              });
+            } else {
+              res.json({
+                status: 0,
+                message: 'Failed to create admin',
+              });
+            }
+          });
       }
     })
     .catch((err) => {

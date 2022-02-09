@@ -1,15 +1,25 @@
 const Sequelize = require('sequelize');
 
 const categoryModel = require('./../models/category');
+const adminModel = require('./../models/admin');
 const Op = Sequelize.Op;
 
-const addCategory = (req, res) => {
+const addCategory = async (req, res) => {
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
+
   categoryModel
     .findOne({
       where: {
         name: req.body.name,
       },
     })
+
     .then((data) => {
       if (data) {
         req.flash('error', 'Category already exists');
@@ -19,6 +29,7 @@ const addCategory = (req, res) => {
           .create({
             name: req.body.name,
             status: req.body.status,
+            schoolId: admin.schoolId,
           })
           .then((category) => {
             if (category) {
@@ -47,7 +58,19 @@ const addCategory = (req, res) => {
 };
 
 const allCategories = async (req, res) => {
-  const allCategories = await categoryModel.findAll();
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
+
+  const allCategories = await categoryModel.findAll({
+    where: {
+      schoolId: admin.schoolId,
+    },
+  });
   res.render('admin/list-category', { categories: allCategories });
 };
 

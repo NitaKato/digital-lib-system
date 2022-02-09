@@ -1,10 +1,19 @@
 const Sequelize = require('sequelize');
 
 const userModel = require('./../models/user');
+const adminModel = require('./../models/admin');
 
 const Op = Sequelize.Op;
 
-const addUser = (req, res, next) => {
+const addUser = async (req, res, next) => {
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
+
   userModel
     .findOne({
       where: {
@@ -24,6 +33,7 @@ const addUser = (req, res, next) => {
             gender: req.body.dd_gender,
             address: req.body.address,
             status: req.body.status,
+            schoolId: admin.schoolId,
           })
           .then((status) => {
             if (status) {
@@ -44,8 +54,21 @@ const addUser = (req, res, next) => {
 };
 
 const allUsers = async (req, res) => {
-  const allUsers = await userModel.findAll();
-  res.render('admin/list-user', { users: allUsers });
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
+
+  const users = await userModel.findAll({
+    where: {
+      schoolId: admin.schoolId,
+    },
+  });
+
+  res.render('admin/list-user', { users: users });
 };
 
 const editUser = async (req, res, next) => {

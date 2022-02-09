@@ -9,11 +9,19 @@ const adminModel = require('./../models/admin');
 const Op = Sequelize.Op;
 
 const addBookView = async (req, res, next) => {
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
   const categories = await categoryModel.findAll({
     where: {
       status: {
         [Op.eq]: '1',
       },
+      schoolId: admin.schoolId,
     },
   });
 
@@ -87,11 +95,18 @@ const addBook = async (req, res, next) => {
 };
 
 const allBooks = async (req, res, next) => {
-  const currency_data = await optionModel.findOne({
+  // const currency_data = await optionModel.findOne({
+  //   where: {
+  //     option_name: {
+  //       [Op.eq]: 'active_currency',
+  //     },
+  //   },
+  // });
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
     where: {
-      option_name: {
-        [Op.eq]: 'active_currency',
-      },
+      id: currentUserId,
     },
   });
 
@@ -100,15 +115,34 @@ const allBooks = async (req, res, next) => {
       model: categoryModel,
       attributes: ['name'],
     },
+    where: {
+      schoolId: admin.schoolId,
+    },
   });
 
   res.render('admin/list-book', {
     books: books,
-    currency_data: currency_data,
+    // currency_data: currency_data,
   });
 };
 
 const editBook = async (req, res, next) => {
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
+  const categories = await categoryModel.findAll({
+    where: {
+      status: {
+        [Op.eq]: '1',
+      },
+      schoolId: admin.schoolId,
+    },
+  });
+
   const book_data = await bookModel.findOne({
     where: {
       id: {
@@ -125,13 +159,6 @@ const editBook = async (req, res, next) => {
     },
   });
 
-  const categories = await categoryModel.findAll({
-    where: {
-      status: {
-        [Op.eq]: '1',
-      },
-    },
-  });
   res.render('admin/edit-book', {
     book: book_data,
     categories: categories,

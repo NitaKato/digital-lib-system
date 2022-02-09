@@ -5,21 +5,30 @@ const userModel = require('./../models/user');
 const bookModel = require('./../models/book');
 const dayModel = require('./../models/daysetting');
 const issueBookModel = require('./../models/issuebook');
+const adminModel = require('./../models/admin');
 
 const Op = Sequelize.Op;
 
 const getIssueBook = async (req, res, next) => {
-  const days = await dayModel.findAll({
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
     where: {
-      status: '1',
+      id: currentUserId,
     },
   });
-
   const categories = await categoryModel.findAll({
     where: {
       status: {
         [Op.eq]: '1',
       },
+      schoolId: admin.schoolId,
+    },
+  });
+
+  const days = await dayModel.findAll({
+    where: {
+      status: '1',
     },
   });
 
@@ -28,6 +37,7 @@ const getIssueBook = async (req, res, next) => {
       status: {
         [Op.eq]: '1',
       },
+      schoolId: admin.schoolId,
     },
   });
 
