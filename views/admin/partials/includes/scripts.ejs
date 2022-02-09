@@ -101,7 +101,7 @@
 
     // add ajax requests
 
-    const app_url = process.env.HOST;
+    const app_url = '<%= process.env.userId%>';
 
     $('#dd_category').on('change', (e) => {
       const postdata = 'cat_id=' + e.target.value;
