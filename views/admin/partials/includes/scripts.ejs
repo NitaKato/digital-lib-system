@@ -100,6 +100,8 @@
     }
 
     // add ajax requests
+    const path = require('path');
+    require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
     const app_url = '<%= process.env.userId%>';
 

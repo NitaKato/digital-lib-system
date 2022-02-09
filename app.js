@@ -5,12 +5,13 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sequelize = require('./config/db');
 
+require('dotenv').config();
+
 const flash = require('express-flash');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
 
 const superAdminRouter = require('./routes/superAdmin');
-const indexRouter = require('./routes/index');
 const schoolRouter = require('./routes/school');
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin');
