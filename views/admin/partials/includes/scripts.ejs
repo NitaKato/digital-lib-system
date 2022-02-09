@@ -105,7 +105,7 @@
 
     $('#dd_category').on('change', (e) => {
       const postdata = 'cat_id=' + e.target.value;
-
+      console.log(postdata);
       $.post(
         app_url + '/admin/issues/category-list-book',
         postdata,
