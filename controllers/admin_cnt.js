@@ -65,7 +65,7 @@ const addAdmin = (req, res, next) => {
 };
 
 const allAdmins = async (req, res) => {
-  const allAdmins = await adminModel.findAll({
+  const admins = await adminModel.findAll({
     include: {
       model: schoolModel,
       attributes: ['name'],
@@ -75,13 +75,15 @@ const allAdmins = async (req, res) => {
     },
   });
 
-  res.render('superadmin/list-admin', { admins: allAdmins });
+  res.render('superadmin/list-admin', { admins: admins });
 };
 
 const editAdmin = async (req, res, next) => {
   const admin_data = await adminModel.findOne({
     where: {
-      id: req.params.id,
+      id: {
+        [Op.eq]: req.params.id,
+      },
     },
   });
 
@@ -96,7 +98,6 @@ const updateAdmin = (req, res, next) => {
       {
         name: req.body.name,
         email: req.body.email,
-        gender: req.body.dd_gender,
         schoolId: req.body.schoolId,
       },
       {
@@ -109,9 +110,9 @@ const updateAdmin = (req, res, next) => {
     )
     .then((status) => {
       if (status) {
-        req.flash('success', 'User has been updated successfully');
+        req.flash('success', 'Admin has been updated successfully');
       } else {
-        req.flash('error', 'Failed to update user');
+        req.flash('error', 'Failed to update admin');
       }
       // res.send('ok');
       res.redirect('/superadmin/edit-admin/' + req.params.id);
@@ -135,7 +136,6 @@ const deleteAdmin = (req, res, next) => {
       }
 
       res.redirect('/superadmin/list-admin');
-      // res.send('ok');
     })
     .catch((err) => {
       res.status(400).json({

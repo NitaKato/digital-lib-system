@@ -27,7 +27,7 @@ router.get('/homepage', async (req, res, next) => {
 router.route('/add-admin').get(addAdminView).post(addAdmin);
 
 router.route('/list-admin').get(allAdmins);
-router.route('/edit-admin/:adminId').get(editAdmin).post(updateAdmin);
+router.route('/edit-admin/:id').get(editAdmin).post(updateAdmin);
 
 router.post('/delete-admin/:adminId', deleteAdmin);
 

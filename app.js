@@ -73,11 +73,15 @@ app.use(
 app.use('/admin/users/:any', express.static(path.join(__dirname, 'public')));
 app.use('/superadmin', express.static(path.join(__dirname, 'public')));
 app.use('/superadmin/:any', express.static(path.join(__dirname, 'public')));
+
 app.use(
   '/superadmin/schools/:any',
   express.static(path.join(__dirname, 'public'))
 );
-
+app.use(
+  '/superadmin/edit-admin/:any',
+  express.static(path.join(__dirname, 'public'))
+);
 // USE ROUTES
 // auth
 app.use('/auth', loginRouter);

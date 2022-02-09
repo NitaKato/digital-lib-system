@@ -11,14 +11,14 @@ const router = express.Router();
 
 router
   .route('/add-school')
-  .get(function (_req, res, _next) {
+  .get(function (req, res, next) {
     res.render('superadmin/add-school');
   })
   .post(addSchool);
 
 router.get('/list-school', allSchools);
 
-router.route('/edit-school/:schoolId').get(getUpdateSchool).post(updateSchool);
+router.route('/edit-school/:id').get(getUpdateSchool).post(updateSchool);
 
 router.post('/delete-school/:schoolId', deleteSchool);
 

@@ -23,3 +23,4 @@ router.route('/edit-user/:id').get(editUser).post(updateUser);
 router.post('/delete-user', deleteUser);
 
 module.exports = router;
+

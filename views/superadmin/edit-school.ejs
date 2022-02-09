@@ -1,124 +1,133 @@
-<%- include('./../admin/partials/header') %>
-
-<style>
-  #frm-add-school label.error {
-    color: red;
-  }
-</style>
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0">Edit School</h1>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Edit School</li>
-          </ol>
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>LMS | Superadmin</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Font Awesome -->
+    <style>
+      #frm-add-school label.error {
+        color: red;
+      }
+    </style>
+    <%- include("./../admin/partials/includes/styles") %>
+  </head>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <%- include("./../admin/partials/includes/top-nav") %> <%-
+      include("./../admin/partials/includes/sa_sidebar") %>
     </div>
-    <!-- /.container-fluid -->
-  </div>
-  <!-- /.content-header -->
 
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-md-12">
-          <% if(messages.success){ %>
-          <div class="alert alert-success"><%= messages.success %></div>
-          <% } %> <% if(messages.error){ %>
-          <div class="alert alert-danger"><%= messages.error %></div>
-          <% } %>
-          <div class="card card-dark">
-            <div class="card-header">
-              <h3 class="card-title">Edit School</h3>
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Edit School</h1>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <form
-                id="frm-add-school"
-                name="frm-add-school"
-                method="POST"
-                action="/superadmin/schools/edit-school/<%=school.id%>"
-              >
-                <div class="row">
-                  <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                      <label>Name</label>
-                      <input
-                        value="<%=school.name%>"
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter name"
-                        name="name"
-                        required
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                      <label>City</label>
-                      <input
-                        value="<%=school.city%>"
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter city"
-                        name="city"
-                        required
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label>Address</label>
-                      <textarea
-                        name="address"
-                        class="form-control"
-                        placeholder="Enter Address"
-                      ><%=school.address%></textarea>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label>Select status</label>
-                      <select class="form-control" name="status">
-                            <option <% if( school.status == '1' ) { %> selected <% } %> value="1">Active</option>                               
-                            <option <% if( school.status == '0' ) { %> selected <% } %> value="0">Inactive</option>
-                       </select>
-                    </div>
-                  </div>
-                </div>
-
-                <button class="btn btn-dark" type="submit">Submit</button>
-              </form>
+            <!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Edit School</li>
+              </ol>
             </div>
-            <!-- /.card-body -->
+            <!-- /.col -->
           </div>
+          <!-- /.row -->
         </div>
+        <!-- /.container-fluid -->
       </div>
-      <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-  </section>
-  <!-- /.content -->
-</div>
+      <!-- /.content-header -->
 
-<%- include('./../admin/partials/footer') %>
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-md-12">
+              <% if(messages.success){ %>
+              <div class="alert alert-success"><%= messages.success %></div>
+              <% } %> <% if(messages.error){ %>
+              <div class="alert alert-danger"><%= messages.error %></div>
+              <% } %>
+              <div class="card card-dark">
+                <div class="card-header">
+                  <h3 class="card-title">Edit School</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <form
+                    id="frm-add-school"
+                    name="frm-add-school"
+                    method="POST"
+                    action="/superadmin/schools/edit-school/<%=school.id%>"
+                  >
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Name</label>
+                          <input
+                            value="<%=school.name%>"
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter name"
+                            name="name"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>City</label>
+                          <input
+                            value="<%=school.city%>"
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter city"
+                            name="city"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Address</label>
+                          <textarea
+                            name="address"
+                            class="form-control"
+                            placeholder="Enter Address"
+                          >
+<%=school.address%></textarea
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <button class="btn btn-dark" type="submit">Submit</button>
+                  </form>
+                </div>
+                <!-- /.card-body -->
+              </div>
+            </div>
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+
+    <%- include('./../admin/partials/footer') %>
+  </body>
+</html>
