@@ -101,7 +101,7 @@
 
     // add ajax requests
 
-    const app_url = 'http://localhost:3000';
+    const app_url = process.env.HOST;
 
     $('#dd_category').on('change', (e) => {
       const postdata = 'cat_id=' + e.target.value;
