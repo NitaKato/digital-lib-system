@@ -100,16 +100,16 @@
     }
 
     // add ajax requests
-    const path = require('path');
-    require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+    // const path = require('path');
 
-    const app_url = '<%= process.env.userId%>';
+    const app_url = process.env.HOST;
 
     $('#dd_category').on('change', (e) => {
       const postdata = 'cat_id=' + e.target.value;
       console.log(postdata);
       $.post(
-        app_url + '/admin/issues/category-list-book',
+        app_url +
+          'https://digital-lib-system.herokuapp.com/admin/issues/category-list-book',
         postdata,
         (response) => {
           let booksHtml = "<option value=''>Choose Book</option>";
