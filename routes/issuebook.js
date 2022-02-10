@@ -11,6 +11,6 @@ router.route('/issue-book').get(getIssueBook).post(issueBook);
 
 router.get('/list-issue-book', getListIssueBook);
 
-router.post('/category-list-book', categoryListBook);
+router.post('/issue-book/category-list-book', categoryListBook);
 
 module.exports = router;
