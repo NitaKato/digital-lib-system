@@ -74,7 +74,7 @@ const allAdmins = async (req, res) => {
       isSuperAdmin: false,
     },
   });
-
+  // console.log('((((((((((((((((((((((((((((((', admins[0].school.name);
   res.render('superadmin/list-admin', { admins: admins });
 };
 
