@@ -91,14 +91,15 @@
     // add ajax requests
 
     // const app_url = 'https://digital-lib-system.herokuapp.com';
-    const app_url = 'http://localhost:3000';
-
+    const app_url = window.location.href;
+    console.log('########################', app_url);
     $('#dd_category').on('change', (e) => {
       console.log(e.target);
       const postdata = 'cat_id=' + e.target.value;
 
       $.post(
-        app_url + '/admin/issues/category-list-book',
+        // app_url + '/admin/issues/category-list-book',
+        app_url + '/category-list-book',
         postdata,
         (response) => {
           let booksHtml = "<option value=''>Choose Book</option>";
