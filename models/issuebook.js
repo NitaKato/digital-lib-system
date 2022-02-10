@@ -21,7 +21,7 @@ const IssueBook = sequelize.define('issueBook', {
     defaultValue: '0',
   },
   returned_date: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
     allowNull: true,
   },
   status: {

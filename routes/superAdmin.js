@@ -15,7 +15,11 @@ const {
 } = require('../controllers/admin_cnt');
 
 router.get('/homepage', async (req, res, next) => {
-  const total_admins = await adminModel.count();
+  const total_admins = await adminModel.count({
+    where: {
+      isSuperAdmin: false,
+    },
+  });
   const total_schools = await schoolModel.count();
 
   res.render('superadmin/sa_index', {

@@ -96,7 +96,7 @@ const issueBook = async (req, res, next) => {
             req.flash('error', 'Failed to issue Book');
           }
 
-          res.redirect('/admin/issues/list-issue-book');
+          res.redirect('/admin/issues/issue-book');
         })
         .catch((err) => {
           res.status(400).json({
@@ -136,9 +136,6 @@ const getListIssueBook = async (req, res) => {
       {
         model: userModel,
         attributes: ['name', 'email'],
-        where: {
-          schoolId: admin.schoolId,
-        },
       },
     ],
     attributes: ['days_issued', 'issued_date'],
