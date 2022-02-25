@@ -64,7 +64,7 @@ const issueBook = async (req, res, next) => {
   });
 
   if (is_book_issued > 0) {
-    req.flash('error', 'Book has been already issued to this user');
+    req.flash('error', 'Ky libër është huazur te nxënësi');
     res.redirect('/admin/issues/issue-book');
   } else {
     const count_books = await issueBookModel.count({
@@ -79,7 +79,7 @@ const issueBook = async (req, res, next) => {
     });
 
     if (count_books >= 2) {
-      req.flash('error', 'Maximum books allowed for each user equals to 2');
+      req.flash('error', 'Numri maksimal për huazime është 2 për nxënës');
       res.redirect('/admin/issues/issue-book');
     } else {
       issueBookModel
@@ -91,9 +91,9 @@ const issueBook = async (req, res, next) => {
         })
         .then((status) => {
           if (status) {
-            req.flash('success', 'Book has been issued successfully');
+            req.flash('success', 'Libri u huazua me sukses!');
           } else {
-            req.flash('error', 'Failed to issue Book');
+            req.flash('error', 'Huazimi i librit dështoi!');
           }
 
           res.redirect('/admin/issues/issue-book');
@@ -146,7 +146,6 @@ const getListIssueBook = async (req, res) => {
     },
   });
   console.log(issueList);
-  // res.json(issueList);
   res.render('admin/issue-history', {
     list: issueList,
   });

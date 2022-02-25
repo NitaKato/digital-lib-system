@@ -1,5 +1,4 @@
 const redirectHome = function (req, res, next) {
-  // check session variables
   if (req.session.userId) {
     if (req.session.superAdmin) {
       return res.redirect('/superadmin/homepage');
@@ -11,7 +10,6 @@ const redirectHome = function (req, res, next) {
 };
 
 const redirectLogin = function (req, res, next) {
-  // check session variables
   if (!req.session.userId) {
     res.redirect('/auth/login');
   } else {

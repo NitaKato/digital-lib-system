@@ -5,34 +5,29 @@
     color: red;
   }
 </style>
-<!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Edit Category</h1>
+          <h1 class="m-0">Modifiko Kategorinë</h1>
         </div>
-        <!-- /.col -->
+    
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Edit Category</li>
+            <li class="breadcrumb-item"><a href="/admin">Ballina</a></li>
+            <li class="breadcrumb-item active">Modifiko Kategorinë</li>
           </ol>
         </div>
-        <!-- /.col -->
+  
       </div>
-      <!-- /.row -->
+ 
     </div>
-    <!-- /.container-fluid -->
   </div>
-  <!-- /.content-header -->
-
-  <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
+   
       <div class="row">
         <div class="col-md-12">
            <% if(messages.success){ %>
@@ -42,9 +37,9 @@
           <% } %>
           <div class="card card-dark">
             <div class="card-header">
-              <h3 class="card-title">Edit Category</h3>
+              <h3 class="card-title">Modifiko Kategorinë</h3>
             </div>
-            <!-- /.card-header -->
+         
             <div class="card-body">
               <form
                 id="frm-add-category"
@@ -54,13 +49,13 @@
               >
                 <div class="row">
                   <div class="col-sm-6">
-                    <!-- text input -->
+                
                     <div class="form-group">
-                      <label>Name</label>
+                      <label>Emri</label>
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Enter name"
+                        placeholder="Shëno emrin"
                         name="name"
                         value="<%= category.name  %>"
                         required
@@ -69,28 +64,28 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Select status</label>
+                      <label>Selekto statusin</label>
                       <select class="form-control" name="status" id="">
-                        <option <% if(category.status == '1') {%> selected <%  } %>  value="1">Active</option>
-                        <option <% if(category.status == '0') {%> selected <%  } %> value="0">Inactive</option>
+                        <option <% if(category.status == '1') {%> selected <%  } %>  value="1">Aktiv</option>
+                        <option <% if(category.status == '0') {%> selected <%  } %> value="0">Jo Aktiv</option>
                       </select>
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-dark" type="submit">Submit</button>
+                <button class="btn btn-dark" type="submit">Modifiko</button>
               </form>
             </div>
 
-            <!-- /.card-body -->
+        
           </div>
          
         </div>
       </div>
-      <!-- /.row -->
+ 
     </div>
-    <!-- /.container-fluid -->
+
   </section>
-  <!-- /.content -->
+
 </div>
 
 <%- include('partials/footer') %>

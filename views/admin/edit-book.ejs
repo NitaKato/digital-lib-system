@@ -11,34 +11,28 @@
   }
 </style>
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
+ 
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Edit Book</h1>
+          <h1 class="m-0">Modifiko Librin</h1>
         </div>
-        <!-- /.col -->
+
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Edit Book</li>
+            <li class="breadcrumb-item"><a href="/admin">Ballina</a></li>
+            <li class="breadcrumb-item active">Modifiko Librin</li>
           </ol>
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
   </div>
-  <!-- /.content-header -->
 
-  <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
+    
       <div class="row">
         <div class="col-md-12">
              <% if(messages.success){ %>
@@ -48,9 +42,9 @@
           <% } %>
           <div class="card card-dark">
             <div class="card-header">
-              <h3 class="card-title">Edit Book</h3>
+              <h3 class="card-title">Modifiko Librin</h3>
             </div>
-            <!-- /.card-header -->
+           
             
             <div class="card-body">
               <form
@@ -63,7 +57,7 @@
                   <div class="col-sm-6">
                     <!-- text input -->
                     <div class="form-group">
-                      <label>Name</label>
+                      <label>Emri</label>
                       <input
                         value="<%=book.name%>"
                         type="text"
@@ -77,14 +71,14 @@
 
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Select Category</label>
+                      <label>Selekto Kategorinë</label>
                       <select
                         class="form-control"
                         required
                         name="dd_category"
                         id=""
                       >
-                        <option value="">Choose category</option>
+                        <option value="">Zgjedh kategorinë</option>
                         <% categories.forEach(category => { %>
                         <option <% if (book.categoryId == category.id) { %> selected <% } %>  value="<%=category.id%>">
                           <%=category.name%>
@@ -96,9 +90,9 @@
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
-                    <!-- text input -->
+                
                     <div class="form-group">
-                      <label>Description</label>
+                      <label>Përshkrimi</label>
                       <textarea
                         class="form-control"
                         name="description"
@@ -111,7 +105,7 @@
 
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Amount</label>
+                      <label>Sasia</label>
                       <input
                         value="<%=book.amount%>"
                         type="number"
@@ -126,9 +120,9 @@
 
                 <div class="row">
                   <div class="col-sm-6">
-                    <!-- text input -->
+                
                     <div class="form-group">
-                      <label>Cover Image</label>
+                      <label>Kopertina</label>
                       <input
                         type="file"
                         name="cover_image"
@@ -142,7 +136,7 @@
 
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Author</label>
+                      <label>Autori</label>
                       <input
                         value="<%=book.author%>"
                         type="text"
@@ -158,27 +152,27 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Select status</label>
+                      <label>Selekto Statusin</label>
                       <select class="form-control" name="status" id="">
-                        <option <% if (book.status == '1') { %> selected <% } %>  value="1">Active</option>
-                        <option <% if (book.status == '0') { %> selected <% } %>  value="0">Inactive</option>
+                        <option <% if (book.status == '1') { %> selected <% } %>  value="1">Aktiv</option>
+                        <option <% if (book.status == '0') { %> selected <% } %>  value="0">Jo Aktiv</option>
                       </select>
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-dark" type="submit">Submit</button>
+                <button class="btn btn-dark" type="submit">Modifiko</button>
               </form>
             </div>
-            <!-- /.card-body -->
+           
           </div>
           
         </div>
       </div>
-      <!-- /.row -->
+   
     </div>
-    <!-- /.container-fluid -->
+ 
   </section>
-  <!-- /.content -->
+ 
 </div>
 
 <%- include('partials/footer') %>

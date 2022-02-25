@@ -12,6 +12,6 @@ router.route('/return-book').get(getReturnBook).post(returnBook);
 
 router.get('/list-return-book', getListReturnBook);
 
-router.post('/user-list-book', userListBook);
+router.post('/return-book/user-list-book', userListBook);
 
 module.exports = router;

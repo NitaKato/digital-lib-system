@@ -9,7 +9,6 @@
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script src="plugins/moment/moment.min.js"></script>
-<!-- <script src="plugins/daterangepicker/daterangepicker.js"></script> -->
 
 <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 
@@ -88,54 +87,41 @@
       $('#tbl-list-admin').DataTable();
     }
 
-    // add ajax requests
-
-    // const app_url = 'https://digital-lib-system.herokuapp.com';
     const app_url = window.location.href;
-    console.log('########################', app_url);
+
     $('#dd_category').on('change', (e) => {
-      console.log(e.target);
       const postdata = 'cat_id=' + e.target.value;
 
-      $.post(
-        // app_url + '/admin/issues/category-list-book',
-        app_url + '/category-list-book',
-        postdata,
-        (response) => {
-          let booksHtml = "<option value=''>Choose Book</option>";
+      $.post(app_url + '/category-list-book', postdata, (response) => {
+        let booksHtml = "<option value=''>Zgjedh librin</option>";
 
-          $.each(response.books, (index, item) => {
-            booksHtml +=
-              '<option value="' + item.id + '">' + item.name + '</option>';
-          });
+        $.each(response.books, (index, item) => {
+          booksHtml +=
+            '<option value="' + item.id + '">' + item.name + '</option>';
+        });
 
-          $('#dd_book_list').html(booksHtml);
-        }
-      );
+        $('#dd_book_list').html(booksHtml);
+      });
     });
 
     $('#return_dd_user').on('change', (e) => {
-      console.log(e.target);
       const postdata = 'user_id=' + e.target.value;
-      // console.log('@@@@@@@@@@@@@@@@@@@@@@', postdata);
-      $.post(
-        app_url + '/admin/returns/user-list-book',
-        postdata,
-        (response) => {
-          let booksHtml = "<option value=''>Choose Book</option>";
 
-          $.each(response.books, (index, item) => {
-            booksHtml +=
-              '<option value="' +
-              item.bookId +
-              '">' +
-              item.book.name +
-              '</option>';
-          });
+      $.post(app_url + '/user-list-book', postdata, (response) => {
+        let booksHtml = "<option value=''>Zgjedh librin</option>";
 
-          $('#return_dd_book').html(booksHtml);
-        }
-      );
+        $.each(response.books, (index, item) => {
+          booksHtml +=
+            '<option value="' +
+            item.bookId +
+            '">' +
+            item.book.name +
+            '</option>';
+        });
+        console.log(response.books);
+
+        $('#return_dd_book').html(booksHtml);
+      });
     });
   });
 </script>

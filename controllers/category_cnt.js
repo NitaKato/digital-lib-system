@@ -23,7 +23,7 @@ const addCategory = async (req, res) => {
 
     .then((data) => {
       if (data) {
-        req.flash('error', 'Category already exists');
+        req.flash('error', 'Kategoria ekziston');
         res.redirect('/admin/categories/add-category');
       } else {
         categoryModel
@@ -34,10 +34,10 @@ const addCategory = async (req, res) => {
           })
           .then((category) => {
             if (category) {
-              req.flash('success', 'Category created successfully');
+              req.flash('success', 'Kategoria u krijua me sukses');
               res.redirect('/admin/categories/add-category');
             } else {
-              req.flash('error', 'Failed to create category');
+              req.flash('error', 'Krijimi i kategorisë dështoi');
 
               res.redirect('/admin/categories/add-category');
             }
@@ -104,7 +104,7 @@ const updateCategory = (req, res, next) => {
     })
     .then((category) => {
       if (category) {
-        req.flash('error', 'Category already exists!');
+        req.flash('error', 'Kategoria ekziston!');
         res.redirect('/admin/categories/edit-category/' + req.params.id);
       } else {
         categoryModel
@@ -121,9 +121,9 @@ const updateCategory = (req, res, next) => {
           )
           .then((updatedCategory) => {
             if (updatedCategory) {
-              req.flash('success', 'Category updated successfully!');
+              req.flash('success', 'Kategoria u modifikua me sukses!');
             } else {
-              req.flash('error', 'Failed to update category!');
+              req.flash('error', 'Modifikimi i kategorisë dështoi!');
             }
             res.redirect('/admin/categories/edit-category/' + req.params.id);
           })
@@ -164,9 +164,9 @@ const deleteCategory = (req, res, next) => {
           })
           .then((status) => {
             if (status) {
-              req.flash('success', 'Category has been deleted successfully');
+              req.flash('success', 'Kategoria u fshi!');
             } else {
-              req.flash('error', 'Failed to delete category');
+              req.flash('error', 'Fshirja e kategorisë dështoi!');
             }
 
             res.redirect('/admin/categories/list-category');

@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>LMS | Superadmin</title>
-    <!-- Tell the browser to be responsive to screen width -->
+    <title>Biblioteka e Qytetit - Lipjan</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Font Awesome -->
+
     <%- include("./../admin/partials/includes/styles") %>
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
@@ -15,34 +15,26 @@
       include("./../admin/partials/includes/sa_sidebar") %>
     </div>
   </body>
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Add Admin</h1>
+            <h1 class="m-0">Shto Admin</h1>
           </div>
-          <!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add Admin</li>
+              <li class="breadcrumb-item">
+                <a href="/superadmin/homepage">Ballina</a>
+              </li>
+              <li class="breadcrumb-item active">Shto Admin</li>
             </ol>
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
         <div class="row">
           <div class="col-md-12">
             <% if(messages.success){ %>
@@ -52,9 +44,8 @@
             <% } %>
             <div class="card card-dark">
               <div class="card-header">
-                <h3 class="card-title">Add Admin</h3>
+                <h3 class="card-title">Shto Admin</h3>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
                 <form
                   id="frm-add-user"
@@ -64,26 +55,24 @@
                 >
                   <div class="row">
                     <div class="col-sm-6">
-                      <!-- text input -->
                       <div class="form-group">
-                        <label>Name</label>
+                        <label>Emri</label>
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Enter name"
+                          placeholder="Shëno emrin"
                           name="name"
                           required
                         />
                       </div>
                     </div>
                     <div class="col-sm-6">
-                      <!-- text input -->
                       <div class="form-group">
                         <label>Email</label>
                         <input
                           type="email"
                           class="form-control"
-                          placeholder="Enter email"
+                          placeholder="Shëno email"
                           name="email"
                           required
                         />
@@ -92,52 +81,50 @@
                   </div>
 
                   <div class="row">
-                    <!-- LIMIT THIS INPUT TO MAX 10 NUMBERS -->
-                    <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
                     <div class="col-sm-6">
-                      <!-- text input -->
                       <div class="form-group">
-                        <label>ID Number</label>
+                        <label>Numri Personal (10 shifra)</label>
                         <input
+                          id="id_number"
                           type="text"
                           class="form-control"
                           placeholder="Enter personal ID number"
+                          pattern="[0-9]{10}"
                           name="personal_number"
+                          maxlength="10"
+                          minlength="10"
                           required
                         />
                       </div>
                     </div>
-                  </div>
-
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label>Select School</label>
-                      <select
-                        class="form-control"
-                        required
-                        name="schoolId"
-                        id=""
-                      >
-                        <option value="">Choose school</option>
-                        <% schools.forEach(school => { %>
-                        <option value="<%=school.id%>"><%=school.name%></option>
-                        <% }) %>
-                      </select>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Selekto Shkollën</label>
+                        <select
+                          class="form-control"
+                          required
+                          name="schoolId"
+                          id=""
+                        >
+                          <option value="">Zgjedh shkollën</option>
+                          <% schools.forEach(school => { %>
+                          <option value="<%=school.id%>">
+                            <%=school.name%>
+                          </option>
+                          <% }) %>
+                        </select>
+                      </div>
                     </div>
                   </div>
 
-                  <button class="btn btn-dark" type="submit">Submit</button>
+                  <button class="btn btn-dark" type="submit">Shto</button>
                 </form>
               </div>
-              <!-- /.card-body -->
             </div>
           </div>
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
   </div>
 
   <%- include('./../admin/partials/footer') %>

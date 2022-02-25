@@ -22,7 +22,7 @@ const addUser = async (req, res, next) => {
     })
     .then((user) => {
       if (user) {
-        req.flash('error', 'Email address already exists');
+        req.flash('error', 'Email adresa ekziston!');
         res.redirect('/admin/users/add-user');
       } else {
         userModel
@@ -37,10 +37,10 @@ const addUser = async (req, res, next) => {
           })
           .then((status) => {
             if (status) {
-              req.flash('success', 'User has been created');
+              req.flash('success', 'Nxënësi u krijua me sukses!');
               res.redirect('/admin/users/add-user');
             } else {
-              req.flash('error', 'Failed to save users');
+              req.flash('error', 'Krijimi i nxënësit dështoi!');
               res.redirect('/admin/users/add-user');
             }
           });
@@ -105,9 +105,9 @@ const updateUser = (req, res, next) => {
     )
     .then((status) => {
       if (status) {
-        req.flash('success', 'User has been updated successfully');
+        req.flash('success', 'Nxënësi u modifikua me sukses!');
       } else {
-        req.flash('error', 'Failed to update user');
+        req.flash('error', 'Modifikimi i nxënësit dështoi!');
       }
 
       res.redirect('/admin/users/edit-user/' + req.params.id);
@@ -125,9 +125,9 @@ const deleteUser = (req, res, next) => {
     })
     .then((status) => {
       if (status) {
-        req.flash('success', 'User deleted successfully');
+        req.flash('success', 'Nxënësi u fshi!');
       } else {
-        req.flash('error', 'Failed to delete user');
+        req.flash('error', 'Fshirja e nxënësit dështoi!');
       }
 
       res.redirect('/admin/users/list-user');

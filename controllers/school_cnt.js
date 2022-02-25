@@ -14,10 +14,10 @@ const addSchool = (req, res, next) => {
     })
     .then((status) => {
       if (status) {
-        req.flash('success', 'School has been created');
+        req.flash('success', 'Shkolla u krijua me sukses!');
         res.redirect('/superadmin/schools/add-school');
       } else {
-        req.flash('error', 'Failed to save school');
+        req.flash('error', 'Krijimi i shkollës dështoi');
         res.redirect('/superadmin/schools/add-school');
       }
     })
@@ -67,9 +67,9 @@ const updateSchool = (req, res, next) => {
     )
     .then((status) => {
       if (status) {
-        req.flash('success', 'School has been updated successfully');
+        req.flash('success', 'Shkolla u modifikua me sukses!');
       } else {
-        req.flash('error', 'Failed to update school');
+        req.flash('error', 'Modifikimi i shkollës dështoi!');
       }
 
       res.redirect('/superadmin/schools/edit-school/' + req.params.id);
@@ -93,9 +93,9 @@ const deleteSchool = (req, res, next) => {
     })
     .then((status) => {
       if (status) {
-        req.flash('success', 'School deleted successfully');
+        req.flash('success', 'Shkolla u fshi me sukses!');
       } else {
-        req.flash('error', 'Failed to delete school');
+        req.flash('error', 'Fshirja e shkollës dështoi!');
       }
 
       res.redirect('/superadmin/schools/list-school');

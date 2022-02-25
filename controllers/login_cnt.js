@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 
 const adminModel = require('../models/admin');
 
-const Op = Sequelize.Op;
-
 const superAdminRegister = (req, res, next) => {
   adminModel
     .findOne({

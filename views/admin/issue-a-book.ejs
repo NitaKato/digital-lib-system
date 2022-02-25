@@ -5,34 +5,26 @@
     color: red;
   }
 </style>
-<!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Issue a Book</h1>
+          <h1 class="m-0">Huazo Libër</h1>
         </div>
-        <!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Issue a Book</li>
+            <li class="breadcrumb-item"><a href="/admin">Ballina</a></li>
+            <li class="breadcrumb-item active">Huazo Libër</li>
           </ol>
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
   </div>
-  <!-- /.content-header -->
 
-  <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-md-12">
           <% if(messages.success){ %>
@@ -42,9 +34,8 @@
           <% } %>
           <div class="card card-dark">
             <div class="card-header">
-              <h3 class="card-title">Issue a Book</h3>
+              <h3 class="card-title">Huazo Libër</h3>
             </div>
-            <!-- /.card-header -->
             <div class="card-body">
               <form
                 method="post"
@@ -54,14 +45,14 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Select Category</label>
+                      <label>Selekto Kategorinë</label>
                       <select
                         class="form-control"
                         required
                         name="dd_category"
                         id="dd_category"
                       >
-                        <option value="">Choose category</option>
+                        <option value="">Zgjedh kategorinë</option>
                         <% categories.forEach((category)=>{ %>
                         <option value="<%= category.id %>">
                           <%= category.name %>
@@ -73,14 +64,14 @@
 
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Select Book</label>
+                      <label>Selekto Librin</label>
                       <select
                         class="form-control"
                         required
                         name="dd_book"
                         id="dd_book_list"
                       >
-                        <option value="">Choose Book</option>
+                        <option value="">Zgjedh librin</option>
                       </select>
                     </div>
                   </div>
@@ -89,14 +80,14 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Select User</label>
+                      <label>Selekto Nxënësin</label>
                       <select
                         class="form-control"
                         required
                         name="dd_user"
                         id=""
                       >
-                        <option value="">Choose User</option>
+                        <option value="">Zgjedh nxënësin</option>
                         <% users.forEach((user)=>{ %>
                         <option value="<%= user.id %>">
                           <%= user.name %> (<%= user.email %>)
@@ -108,34 +99,29 @@
 
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>How many days?</label>
+                      <label>Për sa ditë?</label>
                       <select
                         class="form-control"
                         required
                         name="dd_days"
                         id=""
                       >
-                        <option value="">Choose Days</option>
-                        <option value="7">7 days</option>
-                        <option value="14">14 days</option>
-                        <option value="30">30 days</option>
+                        <option value="">Zgjedh ditët</option>
+                        <option value="7">7 ditë</option>
+                        <option value="14">14 ditë</option>
+                        <option value="30">30 ditë</option>
                       </select>
                     </div>
                   </div>
                 </div>
-
-                <button class="btn btn-dark" type="submit">Submit</button>
+                <button class="btn btn-dark" type="submit">Shto</button>
               </form>
             </div>
-            <!-- /.card-body -->
           </div>
         </div>
       </div>
-      <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
   </section>
-  <!-- /.content -->
 </div>
 
 <%- include('partials/footer') %>
