@@ -4,7 +4,6 @@ const JWT = require('jsonwebtoken');
 require('dotenv').config();
 
 const adminModel = require('../models/admin');
-// const AppError = require('./../utils/appError');
 const crypto = require('crypto');
 const sendEmail = require('./../utils/email');
 const Sequelize = require('sequelize');
@@ -101,7 +100,7 @@ exports.forgotPassword = async (req, res, next) => {
   const resetUrl = `${req.protocol}://${req.get(
     'host'
   )}/resetPassword/${resetToken}`;
-  const message = `Forgot password? Reset your password in url: ${resetUrl}`;
+  const message = `Keni harruar fjalëkalimin? Kliko për t'a ndryshuar: ${resetUrl}`;
   try {
     await sendEmail({
       email: user.email,

@@ -6,41 +6,34 @@
     height: 80px;
   }
 </style>
-<!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">List Book</h1>
+          <h1 class="m-0">Listo Librat</h1>
         </div>
         <!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">List Book</li>
+            <li class="breadcrumb-item"><a href="#">Ballina</a></li>
+            <li class="breadcrumb-item active">Listo Librat</li>
           </ol>
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
   </div>
-  <!-- /.content-header -->
 
-  <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-md-12">
           <div class="card card-dark">
             <div class="card-header">
-              <h3 class="card-title">List Book</h3>
+              <h3 class="card-title">Listo Librat</h3>
             </div>
-            <!-- /.card-header -->
+
             <div class="card-body">
               <table
                 id="tbl-list-book"
@@ -48,12 +41,12 @@
               >
                 <thead>
                   <tr>
-                    <th>Cover Image</th>
-                    <th>Category</th>
-                    <th>Name</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Kopertina</th>
+                    <th>Kategoria</th>
+                    <th>Emri</th>
+                    <th>Sasia</th>
+                    <th>Statusi</th>
+                    <th>Ndrysho</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -71,15 +64,15 @@
                     <td><%=book.amount%></td>
                     <td>
                       <% if (book.status == '1') { %>
-                      <button class="btn">Active</button>
+                      <button class="btn">Aktiv</button>
                       <% } else { %>
-                      <button class="btn btn-danger">Not Active</button>
+                      <button class="btn btn-danger">Jo Aktiv</button>
                       <% } %>
                     </td>
                     <td>
                       <a href="/admin/books/edit-book/<%=book.id%>" class="btn"
-                        ><i class="fa fa-edit"></i
-                      ></a>
+                        ><i class="fa fa-edit"> Modifiko</i></a
+                      >
                       <form
                         method="post"
                         action="/admin/books/delete-book/<%=book.id%>"
@@ -94,22 +87,22 @@
 
                       <a
                         href="javascript:void(0)"
-                        onclick="if(confirm('Are you sure want to delete ? ')){  $('#frm-delete-book-<%=book.id%>').submit()  }"
+                        onclick="if(confirm('Jeni të sigurtë që doni të fshini? Ky proces nuk mund të kthehet.')){  $('#frm-delete-book-<%=book.id%>').submit()  }"
                         class="btn btn-danger"
-                        ><i class="fa fa-trash"></i
-                      ></a>
+                        ><i class="fa fa-trash"> Fshij</i></a
+                      >
                     </td>
                   </tr>
                   <% }) %>
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Cover Image</th>
-                    <th>Category</th>
-                    <th>Name</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Kopertina</th>
+                    <th>Kategoria</th>
+                    <th>Emri</th>
+                    <th>Sasia</th>
+                    <th>Statusi</th>
+                    <th>Ndrysho</th>
                   </tr>
                 </tfoot>
               </table>

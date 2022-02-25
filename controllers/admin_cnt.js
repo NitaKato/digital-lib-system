@@ -29,7 +29,7 @@ const addAdmin = (req, res, next) => {
     })
     .then((user) => {
       if (user) {
-        req.flash('error', 'Email address already exists');
+        req.flash('error', 'Email adresa ekziston!');
         // res.send('NO');
         res.redirect('/superadmin/add-admin');
       } else {
@@ -43,10 +43,10 @@ const addAdmin = (req, res, next) => {
           })
           .then((status) => {
             if (status) {
-              req.flash('success', 'User has been registered');
+              req.flash('success', 'Admin u regjistrua me sukses!');
               res.redirect('/superadmin/add-admin');
             } else {
-              req.flash('error', 'Failed to register user');
+              req.flash('error', 'Regjistrimi i Admin dështoi!');
               res.redirect('/superadmin/add-admin');
             }
           })
@@ -74,7 +74,6 @@ const allAdmins = async (req, res) => {
       isSuperAdmin: false,
     },
   });
-  // console.log('((((((((((((((((((((((((((((((', admins[0].school.name);
   res.render('superadmin/list-admin', { admins: admins });
 };
 
@@ -110,9 +109,9 @@ const updateAdmin = (req, res, next) => {
     )
     .then((status) => {
       if (status) {
-        req.flash('success', 'Admin has been updated successfully');
+        req.flash('success', 'Admin u modifikua me sukses!');
       } else {
-        req.flash('error', 'Failed to update admin');
+        req.flash('error', 'Modifikimi i Admin dështoi!');
       }
       // res.send('ok');
       res.redirect('/superadmin/edit-admin/' + req.params.id);
@@ -130,9 +129,9 @@ const deleteAdmin = (req, res, next) => {
     })
     .then((status) => {
       if (status) {
-        req.flash('success', 'User deleted successfully');
+        req.flash('success', 'Admin u fshi me sukses!');
       } else {
-        req.flash('error', 'Failed to delete user');
+        req.flash('error', 'Fshirja e Admin dështoi');
       }
 
       res.redirect('/superadmin/list-admin');

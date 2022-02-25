@@ -45,9 +45,9 @@ const returnBook = (req, res, next) => {
     )
     .then((status) => {
       if (status) {
-        req.flash('success', 'Book has been returned');
+        req.flash('success', 'Libri u kthye');
       } else {
-        req.flash('error', 'Failed to return book');
+        req.flash('error', 'Kthimi i librit dështoi!');
       }
       res.redirect('/admin/returns/return-book');
     })
@@ -122,7 +122,6 @@ const userListBook = async (req, res, next) => {
     where: {
       userId: user_id,
       is_returned: '0',
-      //   schoolId: admin.schoolId,
     },
     attributes: ['bookId'],
   });

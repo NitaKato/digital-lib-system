@@ -49,7 +49,7 @@ const addBook = async (req, res, next) => {
   });
 
   if (!req.files) {
-    req.flash('error', 'Please upload some file');
+    req.flash('error', 'Të lutem ngarko një foto!');
   } else {
     const image_attr = req.files.cover_image;
 
@@ -62,8 +62,6 @@ const addBook = async (req, res, next) => {
       bookModel
         .create({
           name: req.body.name,
-          // change dd_category to categoryId
-          // Change categoryId to dd_category ...
           categoryId: req.body.dd_category,
           description: req.body.description,
           amount: req.body.amount,
@@ -74,9 +72,9 @@ const addBook = async (req, res, next) => {
         })
         .then((data) => {
           if (data) {
-            req.flash('success', 'Book has been created');
+            req.flash('success', 'Libri u krijua me sukses!');
           } else {
-            req.flash('error', 'Failed to create book');
+            req.flash('error', 'Krijimi i librit dështoi!');
           }
 
           res.redirect('/admin/books/add-book');
@@ -88,20 +86,13 @@ const addBook = async (req, res, next) => {
           });
         });
     } else {
-      req.flash('error', 'Invalid file selected');
+      req.flash('error', 'Lloji i File është i gabuar!');
       res.redirect('/admin/books/add-book');
     }
   }
 };
 
 const allBooks = async (req, res, next) => {
-  // const currency_data = await optionModel.findOne({
-  //   where: {
-  //     option_name: {
-  //       [Op.eq]: 'active_currency',
-  //     },
-  //   },
-  // });
   const currentUserId = req.session.userId;
 
   const admin = await adminModel.findOne({
@@ -122,7 +113,6 @@ const allBooks = async (req, res, next) => {
 
   res.render('admin/list-book', {
     books: books,
-    // currency_data: currency_data,
   });
 };
 
@@ -151,18 +141,9 @@ const editBook = async (req, res, next) => {
     },
   });
 
-  const currency_data = await optionModel.findOne({
-    where: {
-      option_name: {
-        [Op.eq]: 'active_currency',
-      },
-    },
-  });
-
   res.render('admin/edit-book', {
     book: book_data,
     categories: categories,
-    currency_data: currency_data,
   });
 };
 
@@ -189,9 +170,9 @@ const updateBook = (req, res, next) => {
       )
       .then((data) => {
         if (data) {
-          req.flash('success', 'Book has been updated successfully');
+          req.flash('success', 'Libri u modifikua me sukses!');
         } else {
-          req.flash('error', 'Failed to update book');
+          req.flash('error', 'Modifikimi i librit dështoi!');
         }
 
         res.redirect('/admin/books/edit-book/' + req.params.bookId);
@@ -226,15 +207,15 @@ const updateBook = (req, res, next) => {
         )
         .then((data) => {
           if (data) {
-            req.flash('success', 'Book has been updated successfully');
+            req.flash('success', 'Libri u modifikua me sukses!');
           } else {
-            req.flash('error', 'Failed to update book');
+            req.flash('error', 'Modifikimi i librit dështoi!');
           }
 
           res.redirect('/admin/books/edit-book/' + req.params.bookId);
         });
     } else {
-      req.flash('error', 'Invalid file selected');
+      req.flash('error', 'Lloji i File është i gabuar!');
       res.redirect('/admin/books/edit-book/' + req.params.bookId);
     }
   }
@@ -261,10 +242,10 @@ const deleteBook = (req, res, next) => {
           })
           .then((status) => {
             if (status) {
-              req.flash('success', 'Book has been deleted');
+              req.flash('success', 'Libri u fshi me sukses!');
               res.redirect('/admin/books/list-book');
             } else {
-              req.flash('error', 'Failed to delete Book');
+              req.flash('error', 'Fshirja e librit dështoi!');
               res.redirect('/admin/books/list-book');
             }
           });

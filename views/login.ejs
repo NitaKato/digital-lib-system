@@ -3,24 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>LMS | Admin Log in</title>
-
+    <title>Biblioteka e Qytetit - Lipjan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
-
     <link
       rel="stylesheet"
       href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
     />
-
     <link
       rel="stylesheet"
       href="plugins/icheck-bootstrap/icheck-bootstrap.min.css"
     />
-
     <link rel="stylesheet" href="dist/css/adminlte.min.css" />
-
     <link
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
       rel="stylesheet"
@@ -29,16 +23,16 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="javascript:void(0)"><b>Admin</b>LMS</a>
+        <a href="javascript:void(0)"><b>Libraria </b>e Shkollës</a>
       </div>
-      <!-- /.login-logo -->
+
       <div class="card">
         <div class="card-body login-card-body">
           <% if(messages.success){} if(messages.error){ %>
           <div class="alert alert-danger"><%= messages.error %></div>
           <% } %>
 
-          <p class="login-box-msg">Sign in to start your session</p>
+          <p class="login-box-msg">Kyqu në llogari</p>
 
           <form action="/auth/login" method="post" id="frm-admin-login">
             <div class="input-group mb-3">
@@ -59,7 +53,7 @@
                 type="password"
                 class="form-control"
                 name="password"
-                placeholder="Password"
+                placeholder="Fjalëkalimi"
               />
               <div class="input-group-append">
                 <div class="input-group-text">
@@ -68,26 +62,20 @@
               </div>
             </div>
             <div class="row">
-              <!-- /.col -->
               <div class="col-4">
                 <button type="submit" class="btn btn-primary btn-block">
-                  Sign In
+                  Hyr
                 </button>
               </div>
-              <!-- /.col -->
+              <a href="/auth/forgetpassword">Ke harruar fjalëkalimin?</a>
             </div>
           </form>
         </div>
-        <!-- /.login-card-body -->
       </div>
     </div>
-    <!-- /.login-box -->
 
-    <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
   </body>
 </html>
