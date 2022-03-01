@@ -21,3 +21,17 @@ const getAll = async (req, res, next) => {
     categories,
   });
 };
+
+const bookDetails = async (req, res, next) => {
+  const book_data = await bookModel.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+
+  res.render('details', {
+    book: book_data,
+  });
+};
+
+module.exports = { getAll, bookDetails };

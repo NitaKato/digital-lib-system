@@ -13,8 +13,9 @@ const IssueBook = sequelize.define('issueBook', {
     },
   },
   issued_date: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    type: Sequelize.DATEONLY,
+    allowNull: false,
+    // defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
   },
   is_returned: {
     type: Sequelize.ENUM('1', '0'),

@@ -21,6 +21,8 @@ const Admin = sequelize.define(
       type: Sequelize.BOOLEAN,
       defaultValue: false,
     },
+    passwordResetExpires: Sequelize.STRING,
+    passwordResetToken: Sequelize.STRING,
   },
   {
     timestamps: false,

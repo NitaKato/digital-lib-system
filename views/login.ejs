@@ -67,7 +67,66 @@
                   Hyr
                 </button>
               </div>
-              <a href="/auth/forgetpassword">Ke harruar fjalëkalimin?</a>
+              <!-- Button trigger modal -->
+              <button
+                type="button"
+                class="btn btn-link"
+                data-toggle="modal"
+                data-target="#resetPasswordModal"
+              >
+                Ke harruar fjalëkalimin?
+              </button>
+
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="resetPasswordModal"
+                tabindex="-1"
+                role="dialog"
+              >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">
+                        Reseto fjalëkalimin
+                      </h5>
+
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="modal-body">
+                      <p>
+                        Shëno email për të pranuar kodin. Kodi ka vlefshmëri 10
+                        minuta.
+                      </p>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Shëno email"
+                      />
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Mbyll
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Dërgo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
         </div>
