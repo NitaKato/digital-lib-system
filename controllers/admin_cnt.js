@@ -30,7 +30,6 @@ const addAdmin = (req, res, next) => {
     .then((user) => {
       if (user) {
         req.flash('error', 'Email adresa ekziston!');
-        // res.send('NO');
         res.redirect('/superadmin/add-admin');
       } else {
         let password = req.body.personal_number;

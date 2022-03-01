@@ -61,7 +61,7 @@ const returnBook = async (req, res, next) => {
     .update(
       {
         is_returned: '1',
-        returned_date: Sequelize.fn('NOW'),
+        returned_date: Sequelize.fn('NOW'), 
       },
       {
         where: {

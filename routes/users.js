@@ -1,27 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-const bookModel = require('./../models/book');
-const categoryModel = require('./../models/category');
-const schoolModel = require('./../models/school');
+const { getAll, bookDetails } = require('./../controllers/users_cnt');
 
 /* GET USERS HOMEPAGE. */
-router.get('/', async (req, res, next) => {
-  const books = await bookModel.findAll({
-    include: {
-      model: categoryModel,
-      attributes: ['name'],
-    },
-  });
+router.route('/').get(getAll);
 
-  const schools = await schoolModel.findAll();
-  const categories = await categoryModel.findAll();
-  console.log(books[0].name);
-  res.render('index', {
-    books,
-    schools,
-    categories,
-  });
-});
+router.route('/details/:id').get(bookDetails);
 
 module.exports = router;

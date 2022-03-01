@@ -116,6 +116,7 @@ const issueBook = async (req, res, next) => {
           bookId: req.body.dd_book,
           userId: req.body.dd_user,
           days_issued: req.body.dd_days,
+          issued_date: Sequelize.fn('NOW'),
         })
         .then((status) => {
           if (status) {

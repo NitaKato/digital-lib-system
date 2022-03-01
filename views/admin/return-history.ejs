@@ -34,9 +34,9 @@
               >
                 <thead>
                   <tr>
-                    <th>Kategoria</th>
-                    <th>Libri</th>
                     <th>Nxënësi</th>
+                    <th>Libri</th>
+                    <th>Kategoria</th>
                     <th>Ditët Total</th>
                     <th>Data e Kthimit</th>
                   </tr>
@@ -44,12 +44,12 @@
                 <tbody>
                   <% list.forEach(item => { %>
                   <tr>
-                    <td><%=item.category.name%></td>
-                    <td><%=item.book.name%></td>
                     <td>
                       <%=item.user.name%> <br />
                       <%=item.user.email%>
                     </td>
+                    <td><%=item.book.name%></td>
+                    <td><%=item.category.name%></td>
                     <td><%=item.days_issued%></td>
 
                     <td><%=item.returned_date%></td>
@@ -58,9 +58,9 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Kategoria</th>
-                    <th>Libri</th>
                     <th>Nxënësi</th>
+                    <th>Libri</th>
+                    <th>Kategoria</th>
                     <th>Ditët Total</th>
                     <th>Data e Kthimit</th>
                   </tr>

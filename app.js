@@ -62,8 +62,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// adding assets for admin routes
+// adding assets for routes
 app.use('/:any', express.static(path.join(__dirname, 'public')));
+
 app.use('/admin', express.static(path.join(__dirname, 'public')));
 app.use('/admin/:any', express.static(path.join(__dirname, 'public')));
 app.use('/admin/books/:any', express.static(path.join(__dirname, 'public')));
@@ -91,7 +92,6 @@ app.use('/superadmin/schools', isLoggedIn, isSuperAdmin, schoolRouter);
 app.use('/superadmin', isLoggedIn, isSuperAdmin, superAdminRouter);
 
 //admini
-// app.use('/', indexRouter);
 app.get('/error', errorRouter);
 app.use('/admin/categories', isLoggedIn, isAdmin, categoryRouter);
 app.use('/admin/books', isLoggedIn, isAdmin, bookRouter);
@@ -99,8 +99,8 @@ app.use('/admin/users', isLoggedIn, isAdmin, userRouter);
 app.use('/admin/issues', isLoggedIn, isAdmin, issueBookRouter);
 app.use('/admin/returns', isLoggedIn, isAdmin, returnBookRouter);
 app.use('/admin', isLoggedIn, isAdmin, adminRouter);
-app.get('/books', usersRouter);
-app.get('/', usersRouter);
+app.use('/', usersRouter);
+app.use('/books', usersRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
