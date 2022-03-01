@@ -49,6 +49,13 @@ const getIssueBook = async (req, res, next) => {
 };
 
 const issueBook = async (req, res, next) => {
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
   const is_book_issued = await issueBookModel.count({
     where: {
       userId: {
@@ -78,10 +85,31 @@ const issueBook = async (req, res, next) => {
       },
     });
 
+    let book_amount = await bookModel.findOne({
+      where: {
+        schoolId: admin.schoolId,
+        id: req.body.dd_book,
+      },
+
+      attributes: ['amount'],
+    });
+
     if (count_books >= 2) {
       req.flash('error', 'Numri maksimal për huazime është 2 për nxënës');
       res.redirect('/admin/issues/issue-book');
     } else {
+      updated_amount = book_amount.amount - 1;
+      bookModel.update(
+        {
+          amount: updated_amount,
+        },
+        {
+          where: {
+            schoolId: admin.schoolId,
+            id: req.body.dd_book,
+          },
+        }
+      );
       issueBookModel
         .create({
           categoryId: req.body.dd_category,
@@ -95,13 +123,12 @@ const issueBook = async (req, res, next) => {
           } else {
             req.flash('error', 'Huazimi i librit dështoi!');
           }
-
           res.redirect('/admin/issues/issue-book');
         })
         .catch((err) => {
           res.status(400).json({
             status: 0,
-            data: err,
+            data: err.message,
           });
         });
     }
@@ -145,7 +172,7 @@ const getListIssueBook = async (req, res) => {
       },
     },
   });
-  console.log(issueList);
+
   res.render('admin/issue-history', {
     list: issueList,
   });

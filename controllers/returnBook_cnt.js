@@ -28,7 +28,35 @@ const getReturnBook = async (req, res, next) => {
   });
 };
 
-const returnBook = (req, res, next) => {
+const returnBook = async (req, res, next) => {
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+    },
+  });
+  let book_amount = await bookModel.findOne({
+    where: {
+      schoolId: admin.schoolId,
+      id: req.body.dd_book,
+    },
+
+    attributes: ['amount'],
+  });
+
+  updated_amount = book_amount.amount + 1;
+  bookModel.update(
+    {
+      amount: updated_amount,
+    },
+    {
+      where: {
+        schoolId: admin.schoolId,
+        id: req.body.dd_book,
+      },
+    }
+  );
   issueBookModel
     .update(
       {

@@ -8,12 +8,108 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,700&display=swap"
+      rel="stylesheet"
+    />
     <%- include("./admin/partials/includes/styles") %>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1>Biblioteka e Qytetit - Lipjan</h1>
-    <p>To read or not to read!</p>
-    <%- include("./admin/partials/footer") %>
+    <header>
+      <div class="brand">
+        <p class="brand-name">BIBLIOTEKA E QYTETIT</p>
+        <!-- <p>Gjithmonë e hapur.</p> -->
+      </div>
+      <div class="search">
+        <div class="search-inner">
+          <input
+            type="text"
+            id="search_input"
+            class="Input-text"
+            placeholder="veronika vendos të vdesë, sterjo spase"
+          />
+          <button><span class="fas fa-search"></span></button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="books">
+        <header>
+          <p class="nav-item">Librat</p>
+          <a href="/books/">Të gjitha <i class="fas fa-angle-right"></i></a>
+        </header>
+
+        <div class="content">
+          <% books.forEach(book => { %>
+          <div class="card">
+            <div class="card-header">
+              <img src="<%= book.cover_image%> " alt="rover" />
+            </div>
+            <div class="card-body">
+              <span class="tag"><%= book.category.name %> </span>
+              <h4 class="book-name"><%= book.name %></h4>
+              <p class="book-author"><%= book.author %></p>
+
+              <button>
+                <a href="/books/details/<%=book.id%>">Lexo më shumë</a>
+              </button>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </section>
+
+      <!-- SH.F.M.U Vellezerit Frasheri -->
+      <!-- Shkolla Fillore Ismaul Luma -->
+      <!-- Sh.f. 'Fehmi Agani' Medvec/Lipjan -->
+
+      <section class="categories">
+        <header>
+          <p class="nav-item">Kategorite</p>
+          <a href="/categories/"></a>
+        </header>
+
+        <div class="content">
+          <% categories.forEach(cat => { %>
+          <div class="card">
+            <div class="card-header"></div>
+            <div class="card-body">
+              <span class="tag"><%= cat.name %> </span>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </section>
+      <section class="schools">
+        <header>
+          <p class="nav-item">Shkollat</p>
+        </header>
+
+        <div class="content">
+          <% schools.forEach(school => { %>
+          <div class="card">
+            <div class="card-header">
+              <img src="" alt="SCHOOL IMAGE" />
+            </div>
+            <div class="card-body">
+              <span class="tag"><%= school.name %> </span>
+              <h4 class="book-name"><%= school.address %></h4>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </section>
+    </main>
+    <!--  MAIN -->
+
+    <!--  INCLUDE FOOTER ! -->
+    <!-- include("./admin/partials/footer")  -->
+
+    <!--  <div class="nav-item"><a href="/schools">Shkollat</a></div>
+        <div class="nav-item"><a href="books">Kategorite</a></div> -->
   </body>
 </html>
