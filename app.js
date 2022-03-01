@@ -99,6 +99,7 @@ app.use('/admin/users', isLoggedIn, isAdmin, userRouter);
 app.use('/admin/issues', isLoggedIn, isAdmin, issueBookRouter);
 app.use('/admin/returns', isLoggedIn, isAdmin, returnBookRouter);
 app.use('/admin', isLoggedIn, isAdmin, adminRouter);
+app.get('/books', usersRouter);
 app.get('/', usersRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

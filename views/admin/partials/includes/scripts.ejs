@@ -96,8 +96,17 @@
         let booksHtml = "<option value=''>Zgjedh librin</option>";
 
         $.each(response.books, (index, item) => {
-          booksHtml +=
-            '<option value="' + item.id + '">' + item.name + '</option>';
+          if (item.amount <= 0) {
+            booksHtml +=
+              '<option disabled value="' +
+              item.id +
+              '">' +
+              item.name +
+              '</option>';
+          } else {
+            booksHtml +=
+              '<option value="' + item.id + '">' + item.name + '</option>';
+          }
         });
 
         $('#dd_book_list').html(booksHtml);
