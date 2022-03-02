@@ -23,7 +23,7 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="javascript:void(0)"><b>Libraria </b>e Shkollës</a>
+        <a href="#"><b>Libraria </b>e Shkollës</a>
       </div>
 
       <div class="card">
@@ -63,72 +63,72 @@
             </div>
             <div class="row">
               <div class="col-4">
-                <button type="submit" class="btn btn-primary btn-block">
+                <button type="submit" class="btn btn-success btn-block">
                   Hyr
                 </button>
               </div>
-              <!-- Button trigger modal -->
-              <button
-                type="button"
-                class="btn btn-link"
-                data-toggle="modal"
-                data-target="#resetPasswordModal"
-              >
-                Ke harruar fjalëkalimin?
-              </button>
-
-              <!-- Modal -->
-              <div
-                class="modal fade"
-                id="resetPasswordModal"
-                tabindex="-1"
-                role="dialog"
-              >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">
-                        Reseto fjalëkalimin
-                      </h5>
-
-                      <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-
-                    <div class="modal-body">
-                      <p>
-                        Shëno email për të pranuar kodin. Kodi ka vlefshmëri 10
-                        minuta.
-                      </p>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Shëno email"
-                      />
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                      >
-                        Mbyll
-                      </button>
-                      <button type="button" class="btn btn-primary">
-                        Dërgo
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </form>
+
+          <!-- FORGOT PASSWORD -->
+          <button
+            type="button"
+            class="btn btn-link"
+            data-toggle="modal"
+            data-target="#resetPasswordModal"
+          >
+            Ke harruar fjalëkalimin?
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="resetPasswordModal"
+            tabindex="-1"
+            role="dialog"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Rikthe fjalëkalimin</h5>
+
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <form action="/auth/forgotpassword" method="POST">
+                  <div class="modal-body">
+                    <p>
+                      Shëno email për të pranuar kodin. Kodi ka vlefshmëri 10
+                      minuta.
+                    </p>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Shëno email"
+                      name="email"
+                    />
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Mbyll
+                    </button>
+                    <button type="submit" class="btn btn-primary">Dërgo</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
