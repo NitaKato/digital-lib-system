@@ -25,12 +25,12 @@ const superAdminRegister = (req, res, next) => {
             if (data) {
               res.json({
                 status: 1,
-                message: 'Admin created successfully',
+                message: 'Admin u krijua me sukses',
               });
             } else {
               res.json({
                 status: 0,
-                message: 'Failed to create admin',
+                message: 'Dështoi',
               });
             }
           });
@@ -63,12 +63,12 @@ const login = (req, res, next) => {
             }
             res.redirect('/admin');
           } else {
-            req.flash('error', 'Invalid login details');
+            req.flash('error', 'Email ose fjalëkalimi nuk është i saktë.');
             res.redirect('/auth/login');
           }
         });
       } else {
-        req.flash('error', 'User not found');
+        req.flash('error', 'Nuk u gjet përdorues');
         res.redirect('/auth/login');
       }
     })

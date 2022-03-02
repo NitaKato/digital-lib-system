@@ -64,6 +64,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // adding assets for routes
 app.use('/:any', express.static(path.join(__dirname, 'public')));
+app.use('/auth/:any', express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', express.static(path.join(__dirname, 'public')));
 app.use('/admin/:any', express.static(path.join(__dirname, 'public')));

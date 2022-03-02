@@ -1,21 +1,11 @@
 const express = require('express');
-const Sequelize = require('sequelize');
 
 const categoryModel = require('../models/category');
 const userModel = require('../models/user');
 const bookModel = require('../models/book');
 const adminModel = require('../models/admin');
 
-// const superAdmin = adminModel.findOne({
-//   where: {
-//     isSuperAdmin: true,
-//   },
-// });
-
-const { restrictTo } = require('../controllers/auth_cnt');
-
 const { redirectHome, redirectLogin } = require('../middleware/redirect');
-const { adminRegister } = require('../controllers/login_cnt');
 
 const router = express.Router();
 
