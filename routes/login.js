@@ -6,8 +6,11 @@ const {
   logout,
 } = require('../controllers/login_cnt');
 
+const { isLoggedIn } = require('./../middleware/auth');
+
 const {
   forgotPassword,
+  updateView,
   updatePassword,
   resetPasswordView,
   resetPassword,
@@ -29,7 +32,10 @@ router
   .get(resetPasswordView)
   .post(resetPassword);
 
-router.post('/updatepassword', updatePassword);
+router
+  .route('/updatepassword')
+  .get(isLoggedIn, updateView)
+  .post(isLoggedIn, updatePassword);
 
 router.get('/logout', redirectLogin, logout);
 router.get('/superadmin/register', superAdminRegister); //only ONCE

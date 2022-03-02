@@ -10,6 +10,7 @@ const getAll = async (req, res, next) => {
       model: categoryModel,
       attributes: ['name'],
     },
+    limit: 4,
   });
 
   const schools = await schoolModel.findAll();
