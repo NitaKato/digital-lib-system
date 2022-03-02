@@ -30,7 +30,7 @@ const forgotPassword = async (req, res, next) => {
   const resetUrl = `${req.protocol}://${req.get(
     'host'
   )}/auth/resetPassword/${resetToken}`;
-  const message = `Përshëndetje. Ju keni kërkuar të ndryshoni fjalëkalimin. Kliko në link për t'a ndryshuar: ${resetUrl}`;
+  const message = `Përshëndetje. Ju keni kërkuar të ndryshoni fjalëkalimin. Kliko në link për t'a ndryshuar: ${resetUrl} . Linku ka vlefshmëri 10 minuta!`;
   try {
     await sendEmail({
       from: 'admin@gmail.com',
@@ -97,25 +97,52 @@ const resetPassword = async (req, res, next) => {
   return res.redirect('/auth/login');
 };
 
-const updatePassword = async (req, res, next) => {
-  let { oldPassword, newPassword } = req.body;
-  if (!oldPassword || !newPassword) {
-    req.flash('error', 'Ju lutemi shënoni fjalëkalimin paraprak dhe të riun.');
-  }
+const updateView = async (req, res, next) => {
+  res.render('change-password');
+};
 
-  const user = await adminModel.findOne({
+const updatePassword = async (req, res, next) => {
+  const currentUserId = req.session.userId;
+
+  const admin = await adminModel.findOne({
     where: {
-      id: req.user.id,
+      id: currentUserId,
     },
   });
-  if (!bcrypt.compareSync(oldPassword, user.password)) {
-    req.flash('error', 'Fjalëkalimi paraprak nuk është i saktë');
+
+  let { actual_password, new_password, confirm_password } = req.body;
+  if (!actual_password || !new_password || !confirm_password) {
+    req.flash('error', 'Të gjitha fushat duhet të plotësohen');
   }
+  const user = await adminModel.findOne({
+    where: {
+      id: admin.id,
+    },
+  });
+  if (!bcrypt.compareSync(actual_password, user.password)) {
+    req.flash('error', 'Fjalëkalimi aktual nuk është i saktë');
+    return res.redirect('/auth/updatepassword');
+  }
+  if (new_password != confirm_password) {
+    req.flash('error', 'Fjalëkalimi nuk përshtatet');
+    return res.redirect('/auth/updatepassword');
+  }
+  user.password = bcrypt.hashSync(req.body.new_password, 12);
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+
+  await user.save();
+
+  req.flash('success', 'Fjalëkalimi u ndryshua');
+  res.redirect('/auth/login');
 };
 
 module.exports = {
   forgotPassword,
+  updateView,
   updatePassword,
   resetPasswordView,
   resetPassword,
 };
+
+// Fjalëkalimi nuk përshtatet
