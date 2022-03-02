@@ -82,6 +82,10 @@ const resetPassword = async (req, res, next) => {
   if (!user) {
     req.flash('error', 'Kërkesa nuk është valide, ose ka skaduar!');
   }
+  if (req.body.password != req.body.confirmPassword) {
+    req.flash('error', 'Ju lutem konfirmojeni fjalëkalimin!');
+    return res.render('reset', { token });
+  }
 
   user.password = bcrypt.hashSync(req.body.password, 12);
   user.passwordResetToken = undefined;
