@@ -1,8 +1,35 @@
 body {
   padding: 50px;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  color: #222324;
+}
+
+body > header {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: url('./../images/error.png');
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: bottom right;
 }
 
 a {
   color: #00b7ff;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+.brand {
+  width: 80vw;
+  margin: 0 auto;
+}
+
+.brand-name {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
 }
