@@ -29,7 +29,10 @@ const Admin = sequelize.define(
   }
 );
 
-School.hasMany(Admin);
+School.hasMany(Admin, {
+  onDelete: 'cascade',
+  hooks: true,
+});
 
 Admin.belongsTo(School);
 

@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sequelize = require('./config/db');
+const crypto = require('crypto');
 
 require('dotenv').config();
 
@@ -44,8 +45,7 @@ app.set('view engine', 'ejs');
 
 app.use(
   session({
-    name: 'my_session',
-    secret: 'my_secret',
+    secret: crypto.randomBytes(20).toString('hex'),
     resave: false,
   })
 );
@@ -79,6 +79,10 @@ app.use('/superadmin/:any', express.static(path.join(__dirname, 'public')));
 
 app.use(
   '/superadmin/schools/:any',
+  express.static(path.join(__dirname, 'public'))
+);
+app.use(
+  '/superadmin/list-admin',
   express.static(path.join(__dirname, 'public'))
 );
 app.use(
