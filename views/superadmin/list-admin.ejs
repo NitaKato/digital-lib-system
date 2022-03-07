@@ -48,7 +48,9 @@
                   <thead>
                     <tr>
                       <th>Emri</th>
+                      <th>Mbiemri</th>
                       <th>Email Adresa</th>
+                      <th>Numri i kontaktit</th>
                       <th>Shkolla</th>
                       <th>Ndrysho</th>
                     </tr>
@@ -57,7 +59,9 @@
                     <% admins.forEach(admin => { %>
                     <tr>
                       <td><%=admin.name%></td>
+                      <td><%=admin.surname%></td>
                       <td><%=admin.email%></td>
+                      <td><%=admin.phone_no%></td>
                       <td><%=admin.school.name%></td>
                       <td>
                         <a
@@ -80,7 +84,7 @@
                         <a
                           href="javascript:void(0)"
                           onclick="if(confirm('Jeni të sigurtë që doni të fshini? Ky proces nuk mund të kthehet.')){  $('#frm-delete-admin-<%= admin.id %>').submit()  }"
-                          class="btn btn-danger"
+                          class="btn btn-outline-danger btn-sm"
                           ><i class="fa fa-trash"> Fshij</i></a
                         >
                       </td>
@@ -90,7 +94,9 @@
                   <tfoot>
                     <tr>
                       <th>Emri</th>
+                      <th>Mbiemri</th>
                       <th>Email Adresa</th>
+                      <th>Numri i kontaktit</th>
                       <th>Shkolla</th>
                       <th>Ndrysho</th>
                     </tr>
