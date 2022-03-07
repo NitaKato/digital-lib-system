@@ -9,9 +9,17 @@ const Admin = sequelize.define(
       type: Sequelize.STRING(120),
       allowNull: false,
     },
+    surname: {
+      type: Sequelize.STRING(120),
+      allowNull: false,
+    },
     email: {
       type: Sequelize.STRING(120),
       allowNull: false,
+    },
+    phone_no: {
+      type: Sequelize.STRING(120),
+      allowNull: true,
     },
     password: {
       type: Sequelize.STRING(150),

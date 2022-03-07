@@ -8,7 +8,6 @@ const School = sequelize.define('school', {
   },
   address: {
     type: Sequelize.TEXT,
-    allowNull: false,
   },
   city: {
     type: Sequelize.STRING(50),

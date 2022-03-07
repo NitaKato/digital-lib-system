@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const sendEmail = require('./../utils/email');
 
 const adminModel = require('./../models/admin');
 const schoolModel = require('./../models/school');
@@ -20,7 +22,16 @@ const addAdminView = async (req, res, next) => {
   });
 };
 
-const addAdmin = (req, res, next) => {
+const addAdmin = async (req, res, next) => {
+  const currentUserId = req.session.userId;
+
+  const superadmin = await adminModel.findOne({
+    where: {
+      id: currentUserId,
+      isSuperAdmin: true,
+    },
+  });
+
   adminModel
     .findOne({
       where: {
@@ -32,16 +43,37 @@ const addAdmin = (req, res, next) => {
         req.flash('error', 'Email adresa ekziston!');
         res.redirect('/superadmin/add-admin');
       } else {
-        let password = req.body.personal_number;
+        let password = crypto.randomBytes(4).toString('hex');
+        console.log(password);
         adminModel
           .create({
             name: req.body.name,
+            surname: req.body.surname,
             email: req.body.email,
+            phone_no: req.body.phone_no,
             password: bcrypt.hashSync(password, 6),
             schoolId: req.body.schoolId,
           })
           .then((status) => {
             if (status) {
+              // send password to email
+              const message = `<h4>Ju sapo u regjistruat në platformën digjitale "Bibliotekat e shkollave të qytetit Lipjan".</h4> <p> Username i juaj është: ${status.email}</p> <p>Fjalëkalimi i juaj është ${password} </p>Ju sugjerojmë të ndryshoni fjalëkalimin.
+              <p>Vizitoni webfaqen dhe përdorni informatat e juaja që të kyqeni. </p>.
+              <p> Nëse mendoni se keni pranuar këtë email gabim, ju lutem kontaktoni me: ${superadmin.email}</p> `;
+
+              try {
+                sendEmail({
+                  from: 'admin@gmail.com',
+                  to: status.email,
+                  subject:
+                    'Regjistrimi në Bibliotekat e Shkollave të Qytetit Lipjan',
+                  html: message,
+                });
+              } catch (err) {
+                req.flash('error', 'Dërgimi i email dështoi!');
+                res.redirect('/superadmin/add-admin');
+              }
+              // finish email
               req.flash('success', 'Admin u regjistrua me sukses!');
               res.redirect('/superadmin/add-admin');
             } else {
@@ -51,7 +83,7 @@ const addAdmin = (req, res, next) => {
           })
           .catch((err) => {
             res.status(400).json({
-              data: err,
+              data: err.message,
             });
           });
       }
@@ -95,6 +127,8 @@ const updateAdmin = (req, res, next) => {
     .update(
       {
         name: req.body.name,
+        surname: req.body.surname,
+        phone_no: req.body.phone_no,
         email: req.body.email,
         schoolId: req.body.schoolId,
       },
@@ -112,7 +146,7 @@ const updateAdmin = (req, res, next) => {
       } else {
         req.flash('error', 'Modifikimi i Admin dështoi!');
       }
-      // res.send('ok');
+
       res.redirect('/superadmin/edit-admin/' + req.params.id);
     });
 };
