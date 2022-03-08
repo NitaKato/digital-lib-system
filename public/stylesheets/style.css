@@ -181,13 +181,31 @@ body {
   height: 500px;
 }
 
-.details-section .h5 {
+.details-author {
   color: #6cba8e;
 }
 
 .details-footer span {
-  color:#6cba8e;
+  color: #6cba8e;
   font-weight: 700;
+}
+
+#details_school {
+  cursor: auto;
+  transition: none;
+}
+
+#details_school:hover {
+  background: none;
+  color: #011c1e;
+}
+
+.breadcrumb {
+  background: none;
+}
+
+.breadcrumb-item a {
+  color: #6cba8e;
 }
 /* @media only screen and (max-width: 576px) {
 
