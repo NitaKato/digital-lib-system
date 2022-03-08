@@ -41,10 +41,21 @@
           </div>
         </div>
       </div>
+      
     </div>
 
     <main>
+      
       <section class="container books">
+      <div class="row">
+        <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Ballina</a></li>
+    <li class="breadcrumb-item"><a href="/books/">Librat</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Detajet</li>
+  </ol>
+</nav>
+      </div>  
         <div class="row">
           <div class="mb-4 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-12">
             <div class="image-section">
@@ -58,11 +69,11 @@
           <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 col-8">
             <div class="details-section">
               <p class="h4 fw-bold"><%= book.name %></p>
-              <p class="h5"><%= book.author %></p>
+              <p class="h5 details-author"><%= book.author %></p>
               <p class="mt-4 h6 fw-light">Sasia: <%= book.amount %></p>
               <p class="mt-4 h4">Përshkrimi:</p>
               <p class="mt-2 lead"><%= book.description %></p>
-
+              <p class="btn btn-outline-dark" id="details_school">Librin e gjeni në: <%=book.school.name%></p>
               <hr class="mt-4 mb-4" />
 
               <div class="details-footer">

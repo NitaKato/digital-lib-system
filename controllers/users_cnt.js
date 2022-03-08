@@ -29,6 +29,10 @@ const bookDetails = async (req, res, next) => {
     where: {
       id: req.params.id,
     },
+    include: {
+      model: schoolModel,
+      attributes: ['name'],
+    },
   });
 
   res.render('details', {
