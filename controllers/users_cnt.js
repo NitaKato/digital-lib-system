@@ -10,6 +10,7 @@ const getAll = async (req, res, next) => {
       model: categoryModel,
       attributes: ['name'],
     },
+    order: Sequelize.literal('rand()'),
     limit: 4,
   });
 
