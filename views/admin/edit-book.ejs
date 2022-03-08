@@ -152,6 +152,33 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
+                      <label>Viti i Botimit</label>
+                      <input
+                      value="<%=book.publication_year%>"
+                        type="text"
+                        class="form-control"
+                        name="publication_year"
+                        placeholder="Shëno vitin e botimit"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Shtëpia e Botimit</label>
+                      <input
+                      value="<%=book.publisher%>"
+                        type="text"
+                        class="form-control"
+                        name="publisher"
+                        placeholder="Shëno shtëpinë e botimit"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
                       <label>Selekto Statusin</label>
                       <select class="form-control" name="status" id="">
                         <option <% if (book.status == '1') { %> selected <% } %>  value="1">Aktiv</option>

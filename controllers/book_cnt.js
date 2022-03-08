@@ -67,6 +67,8 @@ const addBook = async (req, res, next) => {
           amount: req.body.amount,
           cover_image: '/images/books/' + filename,
           author: req.body.author,
+          publication_year: req.body.publication_year,
+          publisher: req.body.publisher,
           status: req.body.status,
           schoolId: admin.schoolId,
         })
@@ -158,6 +160,8 @@ const updateBook = (req, res, next) => {
           description: req.body.description,
           amount: req.body.amount,
           author: req.body.author,
+          publication_year: req.body.publication_year,
+          publisher: req.body.publisher,
           status: req.body.status,
         },
         {
@@ -195,6 +199,8 @@ const updateBook = (req, res, next) => {
             amount: req.body.amount,
             cover_image: '/images/books/' + filename,
             author: req.body.author,
+            publication_year: req.body.publication_year,
+            publisher: req.body.publisher,
             status: req.body.status,
           },
           {

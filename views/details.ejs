@@ -14,45 +14,65 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,700&display=swap"
       rel="stylesheet"
     />
+
     <%- include("./admin/partials/includes/styles") %>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <header>
-      <div class="brand">
-        <p class="brand-name">BIBLIOTEKA E QYTETIT</p>
-        <!-- <p>Gjithmonë e hapur.</p> -->
-      </div>
-      <div class="search">
-        <div class="search-inner">
-          <input
-            type="text"
-            id="search_input"
-            class="Input-text"
-            placeholder="veronika vendos të vdesë, sterjo spase"
-          />
-          <button><span class="fas fa-search"></span></button>
+    <div class="jumbotron jumbotron-fluid" style="background: #fdf5f6">
+      <div class="container">
+        <div class="row">
+          <h4 class="display-5">BIBLIOTEKA E SHKOLLAVE TË LIPJANIT</h4>
+          <p class="lead">Gjithmonë e hapur</p>
+        </div>
+        <div class="row">
+          <div class="search col-sm-12 col-md-12 col-lg-8 col-xl-8 col-8">
+            <div class="search-input">
+              <input
+                type="text"
+                class="form-control Input-text"
+                id="search_input"
+                placeholder="Kërko"
+              />
+            </div>
+            <div class="search-footer">
+              <button><i class="fas fa-search"></i></button>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
+    </div>
 
     <main>
-      <div class="image-section">
-        <img src="<%=book.cover_image%>" alt="" />
-      </div>
-      <div class="details-section">
-        <p><%= book.name %></p>
-        <p><%= book.author %></p>
-        <p>Sasia: <%= book.amount %></p>
-        <p>Pershkrimi: <%= book.description %></p>
-      </div>
+      <section class="container books">
+        <div class="row">
+          <div class="mb-4 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-12">
+            <div class="image-section">
+              <img
+                class="details-img img-fluid"
+                src="<%=book.cover_image%>"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 col-8">
+            <div class="details-section">
+              <p class="h4 fw-bold"><%= book.name %></p>
+              <p class="h5"><%= book.author %></p>
+              <p class="mt-4 h6 fw-light">Sasia: <%= book.amount %></p>
+              <p class="mt-4 h4">Pershkrimi:</p>
+              <p class="mt-2 lead"><%= book.description %></p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
-    <!--  MAIN -->
-
-    <!--  INCLUDE FOOTER ! -->
-    <!-- include("./admin/partials/footer")  -->
-
-    <!--  <div class="nav-item"><a href="/schools">Shkollat</a></div>
-        <div class="nav-item"><a href="books">Kategorite</a></div> -->
+    <footer>
+      <strong
+        >Copyright &copy; 2022
+        <a href="/">Biblioteka e Qytetit - Lipjan</a>.</strong
+      >
+      Të gjitha të drejtat e rezervuara
+    </footer>
   </body>
 </html>

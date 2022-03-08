@@ -18,36 +18,44 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <header>
-      <div class="brand">
-        <p class="brand-name">BIBLIOTEKAT E SHKOLLAVE TË LIPJANIT</p>
-        <!-- <p>Gjithmonë e hapur.</p> -->
-      </div>
-      <div class="search">
-        <div class="search-inner">
-          <input
-            type="text"
-            id="search_input"
-            class="Input-text"
-            placeholder="veronika vendos të vdesë, sterjo spase"
-          />
-          <button><span class="fas fa-search"></span></button>
+    <div class="jumbotron jumbotron-fluid" style="background: #fdf5f6">
+      <div class="container">
+        <div class="row">
+          <h4 class="display-5">BIBLIOTEKA E SHKOLLAVE TË LIPJANIT</h4>
+          <p class="lead">Gjithmonë e hapur</p>
+        </div>
+        <div class="row">
+          <div class="search col-sm-12 col-md-12 col-lg-8 col-xl-8 col-8">
+            <div class="search-input">
+              <input
+                type="text"
+                class="form-control Input-text"
+                id="search_input"
+                placeholder="Kërko"
+              />
+            </div>
+            <div class="search-footer">
+              <button><i class="fas fa-search"></i></button>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
+    </div>
 
     <main>
-      <section class="books">
+      <section class="container-fluid books">
         <header>
           <p class="nav-item">Librat</p>
           <a href="/books/">Të gjitha <i class="fas fa-angle-right"></i></a>
         </header>
 
-        <div class="content">
+        <div class="content row">
           <% books.forEach(book => { %>
           <div class="card">
             <div class="card-header">
-              <img src="<%= book.cover_image%> " alt="rover" />
+              <a href="/books/details/<%=book.id%>">
+                <img class="card-header-img" src="<%= book.cover_image%> "
+              /></a>
             </div>
             <div class="card-body">
               <span class="tag"><%= book.category.name %> </span>
@@ -63,52 +71,48 @@
         </div>
       </section>
 
-      <!-- SH.F.M.U Vellezerit Frasheri -->
-      <!-- Shkolla Fillore Ismaul Luma -->
-
-      <section class="categories">
+      <section class="container-fluid categories">
         <header>
           <p class="nav-item">Kategorite</p>
           <a href="/categories/"></a>
         </header>
 
-        <div class="content">
+        <div class="content row justify-content-start">
           <% categories.forEach(cat => { %>
-          <div class="card">
-            <div class="card-header"></div>
-            <div class="card-body">
-              <span class="tag"><%= cat.name %> </span>
-            </div>
+          <div class="col-sm-6 col-md-2">
+            <a class="category_link" href="/books/cat/<%=cat.id%>">
+              <p class="h6 categories_name"><%= cat.name.toUpperCase()%></p>
+            </a>
           </div>
           <% }) %>
         </div>
       </section>
-      <section class="schools">
+      <section class="container-fluid schools">
         <header>
           <p class="nav-item">Shkollat</p>
         </header>
 
-        <div class="content">
+        <div class="content row">
           <% schools.forEach(school => { %>
           <div class="card">
-            <div class="card-header">
-              <img src="" alt="SCHOOL IMAGE" />
-            </div>
             <div class="card-body">
-              <span class="tag"><%= school.name %> </span>
-              <h4 class="book-name"><%= school.address %></h4>
+              <h5 class="tag card-title"><%= school.name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                <%= school.address %> Lorem Ipsum
+              </h6>
             </div>
           </div>
           <% }) %>
         </div>
       </section>
     </main>
+    <footer>
+      <strong
+        >Copyright &copy; 2022
+        <a href="/">Biblioteka e Qytetit - Lipjan</a>.</strong
+      >
+      Të gjitha të drejtat e rezervuara
+    </footer>
     <!--  MAIN -->
-
-    <!--  INCLUDE FOOTER ! -->
-    <!-- include("./admin/partials/footer")  -->
-
-    <!--  <div class="nav-item"><a href="/schools">Shkollat</a></div>
-        <div class="nav-item"><a href="books">Kategorite</a></div> -->
   </body>
 </html>
