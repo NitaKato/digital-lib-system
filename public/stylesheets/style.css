@@ -3,47 +3,22 @@ body {
   background: #fdf5f6;
 }
 
-body > header {
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: url('./../images/main-image.png');
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: bottom right;
-}
-.brand {
-  width: 80vw;
-  margin: 0 auto;
-}
-
-.brand-name {
-  font-size: 2.4rem;
-  font-weight: 700;
-  letter-spacing: 0.1rem;
-}
-
 .search {
-  width: 80vw;
-  margin: 0 auto;
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
-.search-inner {
-  width: 50%;
+
+.search-input {
+  width: 100%;
 }
 
 .Input-text {
+  font-size: 1.2rem;
   padding: 12px 16px;
-  display: block;
-  width: 100%;
-  font-family: inherit;
   font-size: 1.3rem;
   border: none;
   border-radius: 0.4rem;
-  margin: 0;
 }
 
 .Input-text::placeholder {
@@ -55,13 +30,12 @@ body > header {
   box-shadow: 0.2rem 0.8rem 1.6rem rgba(0, 0, 0, 0.11);
 }
 
-.search-inner button {
+.search button {
   position: absolute;
-  top: 0;
-  left: 46%;
-  padding: 14px 26px;
+  right: 8px;
+  padding: 12px 20px;
   border-radius: 0.4rem;
-  font-size: 1.1em;
+  font-size: 0.6rem;
   border: none;
   background: #004445;
   color: #fafafa;
@@ -70,13 +44,13 @@ body > header {
 .books,
 .schools,
 .categories {
-  margin: 40px auto;
+  margin: 60px auto;
 }
 
 .books header,
 .schools header,
 .categories header {
-  width: 78vw;
+  width: 80%;
   margin: 20px auto;
   display: flex;
   justify-content: space-between;
@@ -90,6 +64,18 @@ body > header {
   padding-left: 8px;
   border-left: 5px solid #6cba8e;
   margin: 0;
+}
+
+.card-header {
+  overflow: hidden;
+}
+
+.card-header-img {
+  transition: all 0.5s;
+}
+
+.card-header:hover .card-header-img {
+  transform: scale(1.1);
 }
 
 .books header a {
@@ -133,13 +119,12 @@ body > header {
 }
 
 .tag {
-  font-size: 10px;
+  font-size: 14px;
   color: #011c1e;
-  border-bottom: 1px solid #011c1e;
   padding-bottom: 1px;
   text-transform: uppercase;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .book-name {
@@ -175,4 +160,30 @@ body > header {
   border: none;
 }
 
-/*  SCHOOLS */
+.category_link {
+  text-decoration: none;
+  color: #6cba8e;
+  padding: 4px;
+}
+
+.category_link:hover {
+  text-decoration: none;
+  color: #004445;
+}
+
+/* DETAILS */
+.details-jumbo {
+  padding: 4rem 1rem;
+}
+
+.details-img {
+  width: 350px;
+  height: 500px;
+}
+
+.details-section .h5 {
+  color: #6cba8e;
+}
+/* @media only screen and (max-width: 576px) {
+
+} */

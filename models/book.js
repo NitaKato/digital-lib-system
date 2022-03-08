@@ -29,6 +29,14 @@ const Book = sequelize.define('book', {
     type: Sequelize.STRING(100),
     allowNull: false,
   },
+  publication_year: {
+    type: Sequelize.INTEGER(30),
+    allowNull: true,
+  },
+  publisher: {
+    type: Sequelize.STRING(120),
+    allowNull: true,
+  },
   status: {
     type: Sequelize.ENUM('1', '0'),
     defaultValue: '1',
