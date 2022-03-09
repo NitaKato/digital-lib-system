@@ -92,7 +92,10 @@ body {
   flex-wrap: wrap;
 }
 
+/*  CONTENT  */
+
 .card {
+  padding-top: 8px;
   margin: 10px;
   background-color: #fafafa;
   border-radius: 0.4rem;
@@ -207,6 +210,42 @@ body {
 .breadcrumb-item a {
   color: #6cba8e;
 }
-/* @media only screen and (max-width: 576px) {
 
+/* SEARCH */
+
+#search_books {
+  padding: none;
+  width: 100%;
+  justify-content: flex-end;
+  align-content: space-between;
+}
+
+#search_card {
+  min-width: 260px;
+  padding: 16px;
+  margin-bottom: 30px;
+}
+
+.search_list_cat {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.search_list_item {
+  padding: 8px 0;
+}
+
+.search_list_cat > .lead {
+  font-weight: 700;
+  color: #004445;
+}
+
+/* #search_card {
+  min-width: 240px;
+} */
+
+/* @media only screen and (max-width: 576px) {
+  #search_card {
+    min-width: none;
+  }
 } */
