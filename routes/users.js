@@ -1,11 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-const { getAll, bookDetails } = require('./../controllers/users_cnt');
+const {
+  homepageBooks,
+  bookDetails,
+  allBooks,
+} = require('./../controllers/users_cnt');
 
 /* GET USERS HOMEPAGE. */
-router.route('/').get(getAll);
+router.route('/').get(homepageBooks);
 
-router.route('/details/:id').get(bookDetails);
+router.route('/search/details/:id').get(bookDetails);
+
+router.route('/search').get(allBooks);
 
 module.exports = router;

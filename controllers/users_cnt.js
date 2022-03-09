@@ -4,7 +4,7 @@ const bookModel = require('./../models/book');
 const categoryModel = require('./../models/category');
 const schoolModel = require('./../models/school');
 
-const getAll = async (req, res, next) => {
+const homepageBooks = async (req, res, next) => {
   const books = await bookModel.findAll({
     include: {
       model: categoryModel,
@@ -25,7 +25,7 @@ const getAll = async (req, res, next) => {
       status: '1',
     },
   });
-  
+
   res.render('index', {
     books,
     schools,
@@ -49,4 +49,32 @@ const bookDetails = async (req, res, next) => {
   });
 };
 
-module.exports = { getAll, bookDetails };
+const allBooks = async (req, res, next) => {
+  const books = await bookModel.findAll({
+    include: {
+      model: categoryModel,
+      attributes: ['name'],
+    },
+    order: Sequelize.literal('rand()'),
+  });
+
+  const schools = await schoolModel.findAll({
+    where: {
+      status: '1',
+    },
+  });
+
+  const categories = await categoryModel.findAll({
+    where: {
+      status: '1',
+    },
+  });
+
+  res.render('search', {
+    books,
+    schools,
+    categories,
+  });
+};
+
+module.exports = { homepageBooks, bookDetails, allBooks };

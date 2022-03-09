@@ -46,14 +46,14 @@
       <section class="container-fluid books">
         <header>
           <p class="nav-item">Librat</p>
-          <a href="/books/">Të gjitha <i class="fas fa-angle-right"></i></a>
+          <a href="/search/">Të gjitha <i class="fas fa-angle-right"></i></a>
         </header>
 
         <div class="content row">
           <% books.forEach(book => { %>
           <div class="card">
             <div class="card-header">
-              <a href="/books/details/<%=book.id%>">
+              <a href="/search/details/<%=book.id%>">
                 <img class="card-header-img" src="<%= book.cover_image%> "
               /></a>
             </div>
@@ -63,7 +63,7 @@
               <p class="book-author"><%= book.author %></p>
 
               <button>
-                <a href="/books/details/<%=book.id%>">Lexo më shumë</a>
+                <a href="/search/details/<%=book.id%>">Lexo më shumë</a>
               </button>
             </div>
           </div>

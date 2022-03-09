@@ -47,6 +47,7 @@ app.use(
   session({
     secret: crypto.randomBytes(20).toString('hex'),
     resave: false,
+    saveUninitialized: true,
   })
 );
 app.use(flash());
@@ -106,7 +107,6 @@ app.use('/admin/issues', isLoggedIn, isAdmin, issueBookRouter);
 app.use('/admin/returns', isLoggedIn, isAdmin, returnBookRouter);
 app.use('/admin', isLoggedIn, isAdmin, adminRouter);
 app.use('/', usersRouter);
-app.use('/books', usersRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
