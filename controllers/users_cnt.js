@@ -14,9 +14,18 @@ const getAll = async (req, res, next) => {
     limit: 4,
   });
 
-  const schools = await schoolModel.findAll();
+  const schools = await schoolModel.findAll({
+    where: {
+      status: '1',
+    },
+  });
 
-  const categories = await categoryModel.findAll();
+  const categories = await categoryModel.findAll({
+    where: {
+      status: '1',
+    },
+  });
+  
   res.render('index', {
     books,
     schools,
