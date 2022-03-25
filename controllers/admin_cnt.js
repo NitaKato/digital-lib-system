@@ -59,6 +59,7 @@ const addAdmin = async (req, res, next) => {
               // send password to email
               const message = `<h4>Ju sapo u regjistruat në platformën digjitale "Bibliotekat e shkollave të qytetit Lipjan".</h4> <p> Username i juaj është: ${status.email}</p> <p>Fjalëkalimi i juaj është ${password} </p>Ju sugjerojmë të ndryshoni fjalëkalimin.
               <p>Vizitoni webfaqen dhe përdorni informatat e juaja që të kyqeni. </p>.
+              <a href="http://digital-lib-system.herokuapp.com/admin">Kliko këtu</a>
               <p> Nëse mendoni se keni pranuar këtë email gabim, ju lutem kontaktoni me: ${superadmin.email}</p> `;
 
               try {
