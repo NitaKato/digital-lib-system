@@ -14,7 +14,6 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,700&display=swap"
       rel="stylesheet"
     />
-
     <%- include("./admin/partials/includes/styles") %>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
@@ -84,7 +83,7 @@
             class="content col-sm-12 col-md-9 col-lg-9 col-xl-9 col-12"
             id="search_books"
           >
-            <% books.forEach(book => { %>
+            <% booksByCategory.forEach(book => { %>
             <div
               class="card col-sm-12 col-md-3 col-lg-3 col-xl-3 col-12"
               id="search_card"
@@ -109,6 +108,7 @@
         </div>
       </section>
     </main>
+
     <footer>
       <p>
         Ky projekt u implementua nga IPKO Foundation, me mbështetjen e UNICEF

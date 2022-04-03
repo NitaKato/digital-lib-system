@@ -1,5 +1,5 @@
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   background: #fdf5f6;
 }
 
@@ -211,6 +211,11 @@ body {
   color: #6cba8e;
 }
 
+.all-schools {
+  background-color: rgba(248, 245, 245, 0.925);
+  box-shadow: 0 1px 8px rgb(0 0 0 / 8%);
+}
+
 /* SEARCH */
 
 #search_books {
@@ -238,6 +243,20 @@ body {
 .search_list_cat > .lead {
   font-weight: 700;
   color: #004445;
+}
+
+footer {
+  margin-left: 20px;
+}
+
+.partners {
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.partners img {
+  margin: 0 12px;
 }
 
 /* #search_card {

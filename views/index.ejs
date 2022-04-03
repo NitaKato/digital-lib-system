@@ -14,8 +14,14 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,700&display=swap"
       rel="stylesheet"
     />
+
     <%- include("./admin/partials/includes/styles") %>
+    <script
+      src="https://kit.fontawesome.com/91c3ae4de4.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
   </head>
   <body>
     <div class="jumbotron jumbotron-fluid" style="background: #fdf5f6">
@@ -73,7 +79,7 @@
 
       <section class="container-fluid categories">
         <header>
-          <p class="nav-item">Kategorite</p>
+          <p class="nav-item">Kategoritë</p>
           <a href="/categories/"></a>
         </header>
 
@@ -94,17 +100,29 @@
 
         <div class="content row">
           <% schools.forEach(school => { %>
-          <div class="card">
-            <div class="card-body">
-              <h5 class="tag card-title"><%= school.name %></h5>
-              <h6 class="card-subtitle mb-2 text-muted"><%= school.city %></h6>
-            </div>
+          <div class="all-schools card">
+            <p><%= school.name %></p>
+
+            <h6 class="card-subtitle mb-2 text-muted">
+              <i class="fa-fa-location"></i><%= school.city %>
+            </h6>
           </div>
           <% }) %>
         </div>
       </section>
     </main>
     <footer>
+      <p>
+        Ky projekt u implementua nga IPKO Foundation, me mbështetjen e UNICEF
+        Innovations Lab Kosovo dhe Austrian Development Agency
+      </p>
+      <div class="partners">
+        <img src="/public/images/partners/1. Austrian Development.jpg" alt="" />
+        <img src="/public/images/partners/2.KKLipjan .png" alt="" />
+        <img src="/public/images/partners/3. ING png.png" alt="" />
+        <img src="/public/images/partners/4. IPKO Foundation Logo.png" alt="" />
+        <img src="/public/images/partners/5.UNICEF png.png" alt="" />
+      </div>
       <strong
         >Copyright &copy; 2022
         <a href="/">Biblioteka e Qytetit - Lipjan</a>.</strong
