@@ -39,6 +39,8 @@ const IssueBook = require("./models/issuebook");
 
 const { isLoggedIn, isSuperAdmin, isAdmin } = require("./middleware/auth");
 
+const { isLoggedIn, isSuperAdmin, isAdmin } = require('./middleware/auth');
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
