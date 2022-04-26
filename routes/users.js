@@ -7,8 +7,7 @@ const {
   allBooks,
   searchByCategory,
   userSearch,
-  sortByAsc,
-  sortByDesc,
+  sort,
 } = require("./../controllers/users_cnt");
 
 /* GET USERS HOMEPAGE. */
@@ -21,6 +20,6 @@ router.route("/search/details/:id").get(bookDetails);
 router.route("/search").get(allBooks);
 router.route("/search/:id").get(searchByCategory);
 
-router.post("/search/sort-list", sortByAsc);
+router.post("/search/sort-list", sort);
 
 module.exports = router;

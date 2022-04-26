@@ -60,11 +60,13 @@
             </nav>
           </div>
           <div class="col-3">
-            <select class="form-select" id="order_title">
-              <option selected>Rendit</option>
-              <option value="asc">Titujt A-Z</option>
-              <option value="desc">Titujt Z-A</option>
-            </select>
+            <form action="/search/sort-list" method="post">
+              <select class="form-select" id="order_title">
+                <option selected>Rendit</option>
+                <option value="asc">Titujt A-Z</option>
+                <option value="desc">Titujt Z-A</option>
+              </select>
+            </form>
           </div>
         </div>
         <div class="row">

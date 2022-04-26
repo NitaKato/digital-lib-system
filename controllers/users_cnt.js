@@ -122,36 +122,47 @@ const userSearch = async (req, res, next) => {
   res.render("search", { books, categories });
 };
 
-// const sortByAsc = async (req, res, next) => {
-//   const books = await bookModel.findAll({
-//     order: ["name", "ASC"],
-//   });
-//   return res.json({
-//     books,
-//   });
-// };
+const sort = async (req, res, next) => {
+  const sortChoice = req.body.sort;
+  console.log("222222222", sortChoice);
+  if (sortChoice == "asc") {
+    const books = await bookModel.findAll({
+      include: {
+        model: categoryModel,
+        attributes: ["name"],
+      },
+      order: [["name", "ASC"]],
+    });
+    const categories = await categoryModel.findAll({
+      where: {
+        status: "1",
+      },
+    });
 
-// const sortByDesc = async (req, res, next) => {
-//   const books = await bookModel.findAll({
-//     order: ["name", "DESC"],
-//   });
-//   return res.json({
-//     books,
-//   });
-// };
-
-const sortByAsc = async (req, res, next) => {
-  const books = await bookModel.findAll({
-    order: ["name", "ASC"],
-  });
-  res.render("search", { books });
-};
-
-const sortByDesc = async (req, res, next) => {
-  const books = await bookModel.findAll({
-    order: ["name", "DESC"],
-  });
-  res.render("search", { books });
+    return res.json({
+      status: 1,
+      books: books,
+      categories: categories,
+    });
+  } else {
+    const books = await bookModel.findAll({
+      include: {
+        model: categoryModel,
+        attributes: ["name"],
+      },
+      order: [["name", "DESC"]],
+    });
+    const categories = await categoryModel.findAll({
+      where: {
+        status: "1",
+      },
+    });
+    return res.json({
+      status: 1,
+      books: books,
+      categories: categories,
+    });
+  }
 };
 
 module.exports = {
@@ -160,6 +171,5 @@ module.exports = {
   allBooks,
   searchByCategory,
   userSearch,
-  sortByAsc,
-  sortByDesc,
+  sort,
 };

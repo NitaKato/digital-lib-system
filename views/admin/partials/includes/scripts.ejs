@@ -134,18 +134,39 @@
     });
   });
 
-  // $("#order_title").on("change", (e) => {
-  //   console.log(e.target.value);
+  $("#order_title").on("change", (e) => {
+    const app_url = window.location.href;
+    console.log(e.target.value);
 
-  //   const data = e.target.value;
+    const postdata = "sort=" + e.target.value;
 
-  //   if (data == "asc") {
-  //     $.post(app_url + "/sort-list", data, (response) => {
-  //       $.each(response.books, (index, item) => {
-  //         let booksHtml = `HI`;
-  //       });
-  //       $("#search_books").html(booksHtml);
-  //     });
-  //   }
-  // });
+    $.post(app_url + "sort-list", postdata, (response) => {
+      console.log(response.books);
+      let booksHtml = ``;
+      $.each(response.books, (index, item) => {
+        booksHtml += `
+                  <div
+              class="card col-sm-12 col-md-3 col-lg-3 col-xl-3 col-12"
+              id="search_card"
+            >
+              <div class="card-header">
+                <a href="/search/details/${item.id}">
+                  <img class="card-header-img" src="${item.cover_image}"
+                /></a>
+              </div>
+              <div class="card-body">
+                <span class="tag">${item.category.name}</span>
+                <h4 class="book-name">${item.name}</h4>
+                <p class="book-author">${item.author}</p>
+
+                <button>
+                  <a href="/search/details/${item.id}">Lexo më shumë</a>
+                </button>
+              </div>
+            </div>
+          `;
+      });
+      $("#search_books").html(booksHtml);
+    });
+  });
 </script>
