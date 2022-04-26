@@ -215,6 +215,13 @@ body {
 .all-schools {
   background-color: rgba(248, 245, 245, 0.925);
   box-shadow: 0 1px 8px rgb(0 0 0 / 8%);
+  transition: all 0.3s ease-out;
+}
+
+.all-schools:hover {
+  background: #6cba8e;
+  color: rgba(248, 245, 245, 0.925);
+  cursor: pointer;
 }
 
 /* SEARCH */
@@ -252,8 +259,9 @@ footer {
 
 .partners {
   display: flex;
+  justify-content: space-evenly;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin: 30px 0;
 }
 
 .partners img {
