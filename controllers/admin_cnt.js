@@ -1,10 +1,10 @@
-const Sequelize = require('sequelize');
-const bcrypt = require('bcrypt');
-const crypto = require('crypto');
-const sendEmail = require('./../utils/email');
+const Sequelize = require("sequelize");
+const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const sendEmail = require("./../utils/email");
 
-const adminModel = require('./../models/admin');
-const schoolModel = require('./../models/school');
+const adminModel = require("./../models/admin");
+const schoolModel = require("./../models/school");
 
 const Op = Sequelize.Op;
 
@@ -12,12 +12,12 @@ const addAdminView = async (req, res, next) => {
   const schools = await schoolModel.findAll({
     where: {
       status: {
-        [Op.eq]: '1',
+        [Op.eq]: "1",
       },
     },
   });
 
-  res.render('superadmin/add-admin', {
+  res.render("superadmin/add-admin", {
     schools,
   });
 };
@@ -40,11 +40,11 @@ const addAdmin = async (req, res, next) => {
     })
     .then((user) => {
       if (user) {
-        req.flash('error', 'Email adresa ekziston!');
-        res.redirect('/superadmin/add-admin');
+        req.flash("error", "Email adresa ekziston!");
+        res.redirect("/superadmin/add-admin");
       } else {
-        let password = crypto.randomBytes(4).toString('hex');
-        console.log(password);
+        let password = crypto.randomBytes(4).toString("hex");
+
         adminModel
           .create({
             name: req.body.name,
@@ -59,27 +59,27 @@ const addAdmin = async (req, res, next) => {
               // send password to email
               const message = `<h4>Ju sapo u regjistruat në platformën digjitale "Bibliotekat e shkollave të qytetit Lipjan".</h4> <p> Username i juaj është: ${status.email}</p> <p>Fjalëkalimi i juaj është ${password} </p>Ju sugjerojmë të ndryshoni fjalëkalimin.
               <p>Vizitoni webfaqen dhe përdorni informatat e juaja që të kyqeni. </p>.
-              <a href="http://digital-lib-system.herokuapp.com/admin">Kliko këtu</a>
+              <a href="${request.headers.host}/admin">Kliko këtu</a>
               <p> Nëse mendoni se keni pranuar këtë email gabim, ju lutem kontaktoni me: ${superadmin.email}</p> `;
 
               try {
                 sendEmail({
-                  from: 'admin@gmail.com',
+                  from: "admin@gmail.com",
                   to: status.email,
                   subject:
-                    'Regjistrimi në Bibliotekat e Shkollave të Qytetit Lipjan',
+                    "Regjistrimi në Bibliotekat e Shkollave të Qytetit Lipjan",
                   html: message,
                 });
               } catch (err) {
-                req.flash('error', 'Dërgimi i email dështoi!');
-                res.redirect('/superadmin/add-admin');
+                req.flash("error", "Dërgimi i email dështoi!");
+                res.redirect("/superadmin/add-admin");
               }
               // finish email
-              req.flash('success', 'Admin u regjistrua me sukses!');
-              res.redirect('/superadmin/add-admin');
+              req.flash("success", "Admin u regjistrua me sukses!");
+              res.redirect("/superadmin/add-admin");
             } else {
-              req.flash('error', 'Regjistrimi i Admin dështoi!');
-              res.redirect('/superadmin/add-admin');
+              req.flash("error", "Regjistrimi i Admin dështoi!");
+              res.redirect("/superadmin/add-admin");
             }
           })
           .catch((err) => {
@@ -100,13 +100,13 @@ const allAdmins = async (req, res) => {
   const admins = await adminModel.findAll({
     include: {
       model: schoolModel,
-      attributes: ['name'],
+      attributes: ["name"],
     },
     where: {
       isSuperAdmin: false,
     },
   });
-  res.render('superadmin/list-admin', { admins: admins });
+  res.render("superadmin/list-admin", { admins: admins });
 };
 
 const editAdmin = async (req, res, next) => {
@@ -118,7 +118,7 @@ const editAdmin = async (req, res, next) => {
     },
   });
 
-  res.render('superadmin/edit-admin', {
+  res.render("superadmin/edit-admin", {
     admin: admin_data,
   });
 };
@@ -143,12 +143,12 @@ const updateAdmin = (req, res, next) => {
     )
     .then((status) => {
       if (status) {
-        req.flash('success', 'Admin u modifikua me sukses!');
+        req.flash("success", "Admin u modifikua me sukses!");
       } else {
-        req.flash('error', 'Modifikimi i Admin dështoi!');
+        req.flash("error", "Modifikimi i Admin dështoi!");
       }
 
-      res.redirect('/superadmin/edit-admin/' + req.params.id);
+      res.redirect("/superadmin/edit-admin/" + req.params.id);
     });
 };
 
@@ -163,12 +163,12 @@ const deleteAdmin = (req, res, next) => {
     })
     .then((status) => {
       if (status) {
-        req.flash('success', 'Admin u fshi me sukses!');
+        req.flash("success", "Admin u fshi me sukses!");
       } else {
-        req.flash('error', 'Fshirja e Admin dështoi');
+        req.flash("error", "Fshirja e Admin dështoi");
       }
 
-      res.redirect('/superadmin/list-admin');
+      res.redirect("/superadmin/list-admin");
     })
     .catch((err) => {
       res.status(400).json({

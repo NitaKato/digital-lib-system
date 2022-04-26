@@ -44,7 +44,7 @@ const bookDetails = async (req, res, next) => {
       attributes: ["name"],
     },
   });
-  console.log(book_data);
+
   res.render("details", {
     book: book_data,
   });
@@ -90,7 +90,6 @@ const searchByCategory = async (req, res, next) => {
 };
 
 const userSearch = async (req, res, next) => {
-  console.log(req.query);
   const { searchTerm } = req.query;
   const books = await bookModel.findAll({
     include: {
@@ -118,13 +117,12 @@ const userSearch = async (req, res, next) => {
       status: "1",
     },
   });
-  console.log(books);
+
   res.render("search", { books, categories });
 };
 
 const sort = async (req, res, next) => {
   const sortChoice = req.body.sort;
-  console.log("222222222", sortChoice);
   if (sortChoice == "asc") {
     const books = await bookModel.findAll({
       include: {
