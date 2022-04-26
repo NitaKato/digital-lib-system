@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Biblioteka e Qytetit - Lipjan</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <%- include("./admin/partials/includes/styles") %>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid" style="background: #fdf5f6">
+      <div class="container">
+        <div class="row">
+          <h4 class="display-5">BIBLIOTEKA E SHKOLLAVE TË LIPJANIT</h4>
+          <p class="lead">Gjithmonë e hapur</p>
+        </div>
+        <div class="row">
+          <div class="search col-sm-12 col-md-12 col-lg-8 col-xl-8 col-8">
+            <div class="search-input">
+              <form action="/searchinp">
+                <input
+                  name="searchTerm"
+                  type="text"
+                  class="form-control Input-text"
+                  id="search_input"
+                  placeholder="Kërko"
+                />
+                <div class="search-footer">
+                  <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+              </form>
+            </div>
+            <div class="search-footer">
+              <button><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <section class="container books" id="search_section">
+        <div class="row justify-content-between">
+          <div class="col-4">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Ballina</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <a href="/search">Librat</a>
+                </li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-3">
+            <form action="/search/sort-list" method="post">
+              <select class="form-select" id="order_title">
+                <option selected>Rendit</option>
+                <option value="asc">Titujt A-Z</option>
+                <option value="desc">Titujt Z-A</option>
+              </select>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-4 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-12">
+            <div class="image-section">
+              <ul class="search_list_cat">
+                <p class="lead">Kategoritë</p>
+                <li class="search_list_item">
+                  <a class="link-secondary" href="/search/"> Të gjitha</a>
+                </li>
+                <% categories.forEach(category => { %>
+                <li class="search_list_item">
+                  <a class="link-secondary" href="/search/<%=category.id%>"
+                    ><%=category.name%></a
+                  >
+                </li>
+                <% }) %>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="content col-sm-12 col-md-9 col-lg-9 col-xl-9 col-12"
+            id="search_books"
+          >
+            <% booksBySchool.forEach(book => { %>
+            <div
+              class="card col-sm-12 col-md-3 col-lg-3 col-xl-3 col-12"
+              id="search_card"
+            >
+              <div class="card-header">
+                <a href="/search/details/<%=book.id%>">
+                  <img class="card-header-img" src="<%= book.cover_image%> "
+                /></a>
+              </div>
+              <div class="card-body">
+                <span class="tag"><%= book.category.name %> </span>
+                <h4 class="book-name"><%= book.name %></h4>
+                <p class="book-author"><%= book.author %></p>
+
+                <button>
+                  <a href="/search/details/<%=book.id%>">Lexo më shumë</a>
+                </button>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Ky projekt u implementua nga IPKO Foundation, me mbështetjen e UNICEF
+        Innovations Lab Kosovo dhe Austrian Development Agency
+      </p>
+      <div class="partners">
+        <img src="/public/images/partners/1. Austrian Development.jpg" alt="" />
+        <img src="/public/images/partners/2.KKLipjan .png" alt="" />
+        <img src="/public/images/partners/3. ING png.png" alt="" />
+        <img src="/public/images/partners/4. IPKO Foundation Logo.png" alt="" />
+        <img src="/public/images/partners/5.UNICEF png.png" alt="" />
+      </div>
+      <strong
+        >Copyright &copy; 2022
+        <a href="/">Biblioteka e Qytetit - Lipjan</a>.</strong
+      >
+      Të gjitha të drejtat e rezervuara
+    </footer>
+  </body>
+</html>

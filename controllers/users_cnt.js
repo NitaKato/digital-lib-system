@@ -89,6 +89,29 @@ const searchByCategory = async (req, res, next) => {
   res.render("category", { booksByCategory, categories });
 };
 
+const searchBySchool = async (req, res, next) => {
+  const booksBySchool = await bookModel.findAll({
+    include: [
+      {
+        model: schoolModel,
+        where: {
+          id: req.params.id,
+        },
+      },
+      {
+        model: categoryModel,
+      },
+    ],
+  });
+  const categories = await categoryModel.findAll({
+    where: {
+      status: "1",
+    },
+  });
+
+  res.render("schoolbooks", { booksBySchool, categories });
+};
+
 const userSearch = async (req, res, next) => {
   const { searchTerm } = req.query;
   const books = await bookModel.findAll({
@@ -168,6 +191,7 @@ module.exports = {
   bookDetails,
   allBooks,
   searchByCategory,
+  searchBySchool,
   userSearch,
   sort,
 };

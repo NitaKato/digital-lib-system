@@ -104,7 +104,11 @@
         <div class="content row">
           <% schools.forEach(school => { %>
           <div class="all-schools card">
-            <p><%= school.name %></p>
+            <p>
+              <a href="/search/schoolbooks/<%=school.id%>"
+                ><%= school.name %></a
+              >
+            </p>
 
             <h6 class="card-subtitle mb-2 text-muted">
               <i class="fa-fa-location"></i><%= school.city %>

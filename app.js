@@ -70,6 +70,10 @@ app.use("/books/:any", express.static(path.join(__dirname, "public")));
 app.use("/search/details/", express.static(path.join(__dirname, "public")));
 app.use("/search/details/:any", express.static(path.join(__dirname, "public")));
 app.use("/search/:any", express.static(path.join(__dirname, "public")));
+app.use(
+  "/searchinp/schoolbooks/:any",
+  express.static(path.join(__dirname, "public"))
+);
 app.use("/searchinp/:any", express.static(path.join(__dirname, "public")));
 
 app.use("/auth/:any", express.static(path.join(__dirname, "public")));

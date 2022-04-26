@@ -6,6 +6,7 @@ const {
   bookDetails,
   allBooks,
   searchByCategory,
+  searchBySchool,
   userSearch,
   sort,
 } = require("./../controllers/users_cnt");
@@ -19,6 +20,7 @@ router.route("/search/details/:id").get(bookDetails);
 
 router.route("/search").get(allBooks);
 router.route("/search/:id").get(searchByCategory);
+router.route("/search/schoolbooks/:id").get(searchBySchool);
 
 router.post("/search/sort-list", sort);
 
