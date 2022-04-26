@@ -112,6 +112,7 @@ const userSearch = async (req, res, next) => {
       ],
     },
   });
+
   const categories = await categoryModel.findAll({
     where: {
       status: "1",
@@ -121,10 +122,44 @@ const userSearch = async (req, res, next) => {
   res.render("search", { books, categories });
 };
 
+// const sortByAsc = async (req, res, next) => {
+//   const books = await bookModel.findAll({
+//     order: ["name", "ASC"],
+//   });
+//   return res.json({
+//     books,
+//   });
+// };
+
+// const sortByDesc = async (req, res, next) => {
+//   const books = await bookModel.findAll({
+//     order: ["name", "DESC"],
+//   });
+//   return res.json({
+//     books,
+//   });
+// };
+
+const sortByAsc = async (req, res, next) => {
+  const books = await bookModel.findAll({
+    order: ["name", "ASC"],
+  });
+  res.render("search", { books });
+};
+
+const sortByDesc = async (req, res, next) => {
+  const books = await bookModel.findAll({
+    order: ["name", "DESC"],
+  });
+  res.render("search", { books });
+};
+
 module.exports = {
   homepageBooks,
   bookDetails,
   allBooks,
   searchByCategory,
   userSearch,
+  sortByAsc,
+  sortByDesc,
 };
