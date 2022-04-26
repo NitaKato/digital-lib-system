@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 const bookModel = require("./../models/book");
 const categoryModel = require("./../models/category");
@@ -43,7 +44,7 @@ const bookDetails = async (req, res, next) => {
       attributes: ["name"],
     },
   });
-
+  console.log(book_data);
   res.render("details", {
     book: book_data,
   });
@@ -88,4 +89,42 @@ const searchByCategory = async (req, res, next) => {
   res.render("category", { booksByCategory, categories });
 };
 
-module.exports = { homepageBooks, bookDetails, allBooks, searchByCategory };
+const userSearch = async (req, res, next) => {
+  console.log(req.query);
+  const { searchTerm } = req.query;
+  const books = await bookModel.findAll({
+    include: {
+      model: categoryModel,
+      attributes: ["name"],
+    },
+    where: {
+      [Op.or]: [
+        {
+          name: {
+            [Op.like]: "%" + searchTerm + "%",
+          },
+        },
+        {
+          author: {
+            [Op.like]: "%" + searchTerm + "%",
+          },
+        },
+      ],
+    },
+  });
+  const categories = await categoryModel.findAll({
+    where: {
+      status: "1",
+    },
+  });
+  console.log(books);
+  res.render("search", { books, categories });
+};
+
+module.exports = {
+  homepageBooks,
+  bookDetails,
+  allBooks,
+  searchByCategory,
+  userSearch,
+};

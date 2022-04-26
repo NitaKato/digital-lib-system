@@ -6,10 +6,13 @@ const {
   bookDetails,
   allBooks,
   searchByCategory,
+  userSearch,
 } = require("./../controllers/users_cnt");
 
 /* GET USERS HOMEPAGE. */
 router.route("/").get(homepageBooks);
+
+router.route("/searchinp").get(userSearch);
 
 router.route("/search/details/:id").get(bookDetails);
 

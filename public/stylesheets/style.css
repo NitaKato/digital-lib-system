@@ -33,6 +33,7 @@ body {
 .search button {
   position: absolute;
   right: 8px;
+  top: 0px;
   padding: 12px 20px;
   border-radius: 0.4rem;
   font-size: 0.6rem;

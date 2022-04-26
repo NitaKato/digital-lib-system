@@ -28,12 +28,18 @@
         <div class="row">
           <div class="search col-sm-12 col-md-12 col-lg-8 col-xl-8 col-8">
             <div class="search-input">
-              <input
-                type="text"
-                class="form-control Input-text"
-                id="search_input"
-                placeholder="Kërko"
-              />
+              <form action="/searchinp">
+                <input
+                  name="searchTerm"
+                  type="text"
+                  class="form-control Input-text"
+                  id="search_input"
+                  placeholder="Kërko"
+                />
+                <div class="search-footer">
+                  <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+              </form>
             </div>
             <div class="search-footer">
               <button><i class="fas fa-search"></i></button>
